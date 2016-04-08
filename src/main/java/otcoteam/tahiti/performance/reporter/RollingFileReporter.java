@@ -40,6 +40,7 @@ public class RollingFileReporter extends LogReporter {
      *
      * @return
      */
+    @Override
     public Logger getLogger() {
         return logger;
     }

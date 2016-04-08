@@ -34,6 +34,7 @@ public class AppendFileReporter extends LogReporter {
      *
      * @return
      */
+    @Override
     public Logger getLogger() {
         return logger;
     }
