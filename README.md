@@ -1,6 +1,8 @@
 # TahitiPerformanceMonitor
 
-[![Build Status](https://travis-ci.org/SummerWish/TahitiPerformanceMonitor.svg?branch=master)](https://travis-ci.org/SummerWish/TahitiPerformanceMonitor) [![Coverage Status](https://coveralls.io/repos/github/SummerWish/TahitiPerformanceMonitor/badge.svg?branch=master)](https://coveralls.io/github/SummerWish/TahitiPerformanceMonitor?branch=master)
+[![Build Status](https://travis-ci.org/SummerWish/TahitiPerformanceMonitor.svg?branch=master&style=flat)](https://travis-ci.org/SummerWish/TahitiPerformanceMonitor)
+[![Coverage Status](https://coveralls.io/repos/github/SummerWish/TahitiPerformanceMonitor/badge.svg?branch=master&style=flat)](https://coveralls.io/github/SummerWish/TahitiPerformanceMonitor?branch=master)
+[![Dependency Status](https://www.versioneye.com/user/projects/57091970fcd19a0045440822/badge.svg?style=flat)](https://www.versioneye.com/user/projects/57091970fcd19a0045440822)
 
 一个简单的性能监控库。
 
@@ -57,15 +59,15 @@
 
 ### 手工下载
 
-TahitiPerformanceMonitor 依赖于 [logback](http://logback.qos.ch/) 写入日志。您需要将以下 jar 全部下载下来添加到项目中：
-
-- [logback-classic](http://central.maven.org/maven2/ch/qos/logback/logback-classic/1.1.6/logback-classic-1.1.6.jar)
-
-- [logback-core](http://central.maven.org/maven2/ch/qos/logback/logback-core/1.1.6/logback-core-1.1.6.jar)
-
-- [slf4j-api](http://central.maven.org/maven2/org/slf4j/slf4j-api/1.7.18/slf4j-api-1.7.18.jar)
-
 - [performance](http://10.60.40.241:8888/repository/snapshots/octoteam/tahiti/performance/1.0-SNAPSHOT/performance-1.0-20160409.110112-1.jar)
+
+除了这个库本身以外，TahitiPerformanceMonitor 还依赖于 [logback](http://logback.qos.ch/) 写入日志。您需要将以下 jar 全部下载下来添加到项目中：
+
+- [logback-classic](http://central.maven.org/maven2/ch/qos/logback/logback-classic/1.1.7/logback-classic-1.1.7.jar)
+
+- [logback-core](http://central.maven.org/maven2/ch/qos/logback/logback-core/1.1.7/logback-core-1.1.7.jar)
+
+- [slf4j-api](http://central.maven.org/maven2/org/slf4j/slf4j-api/1.7.20/slf4j-api-1.7.20.jar)
 
 ## 示例
 
