@@ -6,55 +6,55 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * ÊıÖµ¼ÇÂ¼Æ÷£¬¼ÇÂ¼Ö¸±êµÄÆ½¾ùÖµ¡¢×î´óÖµ¡¢×îĞ¡ÖµÒÔ¼°×ÜÖµ
+ * æ•°å€¼è®°å½•å™¨ï¼Œè®°å½•æŒ‡æ ‡çš„å¹³å‡å€¼ã€æœ€å¤§å€¼ã€æœ€å°å€¼ä»¥åŠæ€»å€¼
  */
 public class QuantizedRecorder extends MeasurementRecorder {
 
     /**
-     * Ö¸±êÊıÖµÀàĞÍ
+     * æŒ‡æ ‡æ•°å€¼ç±»å‹
      */
     public enum OutputField {
         /**
-         * Æ½¾ùÖµ
+         * å¹³å‡å€¼
          */
         AVERAGE,
 
         /**
-         * ×î´óÖµ
+         * æœ€å¤§å€¼
          */
         MAX,
 
         /**
-         * ×îĞ¡Öµ
+         * æœ€å°å€¼
          */
         MIN,
 
         /**
-         * ×ÜÖµ
+         * æ€»å€¼
          */
         SUM,
     }
 
     /**
-     * Ö¸±êÃû³Æ
+     * æŒ‡æ ‡åç§°
      */
     private String name;
 
     /**
-     * ¶ÔÓÚ¸ÃÖ¸±ê£¬ĞèÒª¼ÇÂ¼µÄÊıÖµÀàĞÍ
+     * å¯¹äºè¯¥æŒ‡æ ‡ï¼Œéœ€è¦è®°å½•çš„æ•°å€¼ç±»å‹
      */
     private EnumSet<OutputField> outputFields;
 
     /**
-     * Ö¸±êÖµµÄ¼¯ºÏ
+     * æŒ‡æ ‡å€¼çš„é›†åˆ
      */
     private List<Double> records;
 
     /**
-     * ³õÊ¼»¯¼ÇÂ¼Æ÷
+     * åˆå§‹åŒ–è®°å½•å™¨
      *
-     * @param name Ö¸±êÃû³Æ
-     * @param outputFields ÊıÖµÀàĞÍ
+     * @param name æŒ‡æ ‡åç§°
+     * @param outputFields æ•°å€¼ç±»å‹
      */
     public QuantizedRecorder(String name, EnumSet<OutputField> outputFields) {
         this.name = name;
@@ -99,9 +99,9 @@ public class QuantizedRecorder extends MeasurementRecorder {
     }
 
     /**
-     * ¼ÇÂ¼ÊıÖµ
+     * è®°å½•æ•°å€¼
      *
-     * @param value ĞèÒª¼ÇÂ¼µÄÊıÖµ£¬´ËÊıÖµ½«±»¼ÓÈëÖ¸±êÖµµÄ¼¯ºÏÖĞ
+     * @param value éœ€è¦è®°å½•çš„æ•°å€¼ï¼Œæ­¤æ•°å€¼å°†è¢«åŠ å…¥æŒ‡æ ‡å€¼çš„é›†åˆä¸­
      */
     public void record(double value) {
         records.add(value);

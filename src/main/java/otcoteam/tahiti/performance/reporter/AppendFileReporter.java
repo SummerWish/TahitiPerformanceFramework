@@ -5,19 +5,19 @@ import ch.qos.logback.core.FileAppender;
 import ch.qos.logback.core.rolling.RollingFileAppender;
 
 /**
- * ÒÔ×·¼ÓÎÄ¼şµÄ·½Ê½Éú³ÉÈÕÖ¾¼ÇÂ¼
+ * ä»¥è¿½åŠ æ–‡ä»¶çš„æ–¹å¼ç”Ÿæˆæ—¥å¿—è®°å½•
  */
 public class AppendFileReporter extends LogReporter {
 
     /**
-     * ÈÕÖ¾Éú³ÉÆ÷
+     * æ—¥å¿—ç”Ÿæˆå™¨
      */
     protected Logger logger;
 
     /**
-     * ³õÊ¼»¯ÈÕÖ¾Éú³ÉÆ÷
+     * åˆå§‹åŒ–æ—¥å¿—ç”Ÿæˆå™¨
      *
-     * @param fileName ĞèÒª×·¼ÓÈÕÖ¾¼ÇÂ¼µÄÎÄ¼şÃû
+     * @param fileName éœ€è¦è¿½åŠ æ—¥å¿—è®°å½•çš„æ–‡ä»¶å
      */
     public AppendFileReporter(String fileName) {
         FileAppender fileAppender = new RollingFileAppender();
