@@ -25,12 +25,12 @@ public class QuantizedRecorderTest {
         qRecorder.record(10);
         qRecorder.record(100);
         qRecorder.record(70);
-        assertEquals("average=60.00,sum=180.00,min=10,max=100",qRecorder.getReport());
+        assertEquals("{average=60.00, min=10.00, max=100.00}",qRecorder.getReport());
     }
 
     @Test
     public void testReset(){
         qRecorder.reset();
-        assertEquals("",qRecorder.getReport());
+        assertEquals("{average=NaN, min=NaN, max=NaN}",qRecorder.getReport());
     }
 }
