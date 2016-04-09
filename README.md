@@ -71,9 +71,9 @@ public class PerMiniuteCountingExample {
 }
 ```
 
-运行后，请查看当前目录下 `foo-xxxx-xx-xx_xx-xx.log`。每分钟都有一个日志文件，且每个日志文件都包含一分钟内 `request` 和 `login` 指标统计到的次数。
+运行后，请查看当前目录下 `bar-xxxx-xx-xx_xx-xx.log`。每分钟都有一个日志文件，且每个日志文件都包含一分钟内 `request` 和 `login` 指标统计到的次数。
 
-### 每分钟统计指标均值和最值，并写入日志记录到同一个文件
+### 每分钟统计指标各类型数值，并写入日志记录到同一个文件
 
 ```java
 import otcoteam.tahiti.performance.PerformanceMonitor;
@@ -144,5 +144,5 @@ public class PerformanceQuantizedExample {
 
     }
 }
-
+运行后，请查看当前目录下 `foo-xxxx-xx-xx_xx-xx.log`。每分钟都有一个日志文件，且每个日志文件都包含一分钟内 `request` 和 `login` 指标统计到的各类型数值。
 ```
