@@ -12,11 +12,17 @@ public class CountingRecorder extends MeasurementRecorder {
 
     /**
      * TODO
+     */
+    private long counter;
+
+    /**
+     * TODO
      *
      * @param name
      */
     public CountingRecorder(String name) {
         this.name = name;
+        reset();
     }
 
     /**
@@ -34,22 +40,21 @@ public class CountingRecorder extends MeasurementRecorder {
      * @return
      */
     public String getReport() {
-        // TODO
-        return null;
+        return counter+"";
     }
 
     /**
      * TODO
      */
     public void reset() {
-        // TODO
+        counter = 0;
     }
 
     /**
      * TODO
      */
     public void record() {
-        // TODO
+        counter++;
     }
 
 }
