@@ -144,5 +144,6 @@ public class PerformanceQuantizedExample {
 
     }
 }
-运行后，请查看当前目录下 `foo-xxxx-xx-xx_xx-xx.log`。每分钟都有一个日志文件，且每个日志文件都包含一分钟内 `request` 和 `login` 指标统计到的各类型数值。
 ```
+运行后，请查看当前目录下 `foo-xxxx-xx-xx_xx-xx.log`。每分钟都有一个日志文件，且每个日志文件都包含一分钟内 `request` 和 `login` 指标统计到的各类型数值。
+
