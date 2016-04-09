@@ -29,11 +29,7 @@ public class AppendFileReporter extends LogReporter {
         logger.addAppender(fileAppender);
     }
 
-    /**
-     * TODO
-     *
-     * @return
-     */
+
     @Override
     public Logger getLogger() {
         return logger;

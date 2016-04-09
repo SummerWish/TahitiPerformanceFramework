@@ -6,55 +6,55 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * TODO
+ * 数值记录器，记录指标的平均值、最大值、最小值以及总值
  */
 public class QuantizedRecorder extends MeasurementRecorder {
 
     /**
-     * TODO
+     * 指标数值类型
      */
     public enum OutputField {
         /**
-         * TODO
+         * 平均值
          */
         AVERAGE,
 
         /**
-         * TODO
+         * 最大值
          */
         MAX,
 
         /**
-         * TODO
+         * 最小值
          */
         MIN,
 
         /**
-         * TODO
+         * 总值
          */
         SUM,
     }
 
     /**
-     * TODO
+     * 指标名称
      */
     private String name;
 
     /**
-     * TODO
+     * 对于该指标，需要记录的数值类型
      */
     private EnumSet<OutputField> outputFields;
 
     /**
-     * TODO
+     * 指标值的集合
      */
     private List<Double> records;
 
     /**
-     * TODO
+     * 初始化记录器
      *
-     * @param name
-     * @param outputFields
+     * @param name 指标名称
+     * @param outputFields 数值类型
      */
     public QuantizedRecorder(String name, EnumSet<OutputField> outputFields) {
         this.name = name;
@@ -62,20 +62,12 @@ public class QuantizedRecorder extends MeasurementRecorder {
         reset();
     }
 
-    /**
-     * TODO
-     *
-     * @return
-     */
+    @Override
     public String getName() {
         return name;
     }
 
-    /**
-     * TODO
-     *
-     * @return
-     */
+    @Override
     public String getReport() {
         double sum = 0, max = Double.NEGATIVE_INFINITY, min = Double.POSITIVE_INFINITY, avg = 0;
         for (double v : records) {
@@ -101,17 +93,15 @@ public class QuantizedRecorder extends MeasurementRecorder {
         return fields.toString();
     }
 
-    /**
-     * TODO
-     */
+    @Override
     public void reset() {
         records = new LinkedList<Double>();
     }
 
     /**
-     * TODO
+     * 记录数值
      *
-     * @param value
+     * @param value 需要记录的数值，此数值将被加入指标值的集合中
      */
     public void record(double value) {
         records.add(value);

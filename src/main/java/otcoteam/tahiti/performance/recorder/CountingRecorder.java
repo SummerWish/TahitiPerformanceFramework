@@ -1,57 +1,47 @@
 package otcoteam.tahiti.performance.recorder;
 
 /**
- * TODO
+ * 用于对指定指标计数
  */
 public class CountingRecorder extends MeasurementRecorder {
 
     /**
-     * TODO
+     * 指标名称
      */
     private String name;
 
     /**
-     * TODO
+     * 指标计数
      */
     private long counter;
 
     /**
-     * TODO
+     * 初始化计数器
      *
-     * @param name
+     * @param name  指标名称
      */
     public CountingRecorder(String name) {
         this.name = name;
         reset();
     }
 
-    /**
-     * TODO
-     *
-     * @return
-     */
+    @Override
     public String getName() {
         return name;
     }
 
-    /**
-     * TODO
-     *
-     * @return
-     */
+    @Override
     public String getReport() {
         return counter+"";
     }
 
-    /**
-     * TODO
-     */
+    @Override
     public void reset() {
         counter = 0;
     }
 
     /**
-     * TODO
+     * 计数
      */
     public void record() {
         counter++;

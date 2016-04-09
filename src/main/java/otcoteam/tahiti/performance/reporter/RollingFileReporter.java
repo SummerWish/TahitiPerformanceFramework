@@ -38,11 +38,7 @@ public class RollingFileReporter extends LogReporter {
         logger.addAppender(fileAppender);
     }
 
-    /**
-     * TODO
-     *
-     * @return
-     */
+
     @Override
     public Logger getLogger() {
         return logger;

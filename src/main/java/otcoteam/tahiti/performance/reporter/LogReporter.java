@@ -7,35 +7,35 @@ import ch.qos.logback.classic.encoder.PatternLayoutEncoder;
 import org.slf4j.LoggerFactory;
 
 /**
- * TODO
+ * 封装了日志生成器，
  */
 public abstract class LogReporter {
 
     /**
-     * TODO
+     * 日志生成器环境
      */
     private LoggerContext context = (LoggerContext) LoggerFactory.getILoggerFactory();
 
     /**
-     * TODO
+     * 返回日志生成器
      *
-     * @return
+     * @return logger 日志生成器
      */
     public abstract Logger getLogger();
 
     /**
-     * TODO
+     * 返回日志生成器环境
      *
-     * @return
+     * @return context 日志生成器环境
      */
     protected final LoggerContext getLoggerContext() {
         return context;
     }
 
     /**
-     * TODO
+     * 创建日志内记录的格式
      *
-     * @return
+     * @return encoder 用于记录的格式
      */
     protected PatternLayoutEncoder createEncoder() {
         PatternLayoutEncoder encoder = new PatternLayoutEncoder();
@@ -47,9 +47,9 @@ public abstract class LogReporter {
     }
 
     /**
-     * TODO
+     * 创建日志生成器，默认记录所有级别的日志
      *
-     * @return
+     * @return logger 日志生成器
      */
     protected Logger createLogger() {
         Logger logger = (Logger) LoggerFactory.getLogger(LogReporter.class);
