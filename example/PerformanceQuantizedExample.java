@@ -1,5 +1,3 @@
-package otcoteam.tahiti.performance.example;
-
 import otcoteam.tahiti.performance.PerformanceMonitor;
 import otcoteam.tahiti.performance.recorder.QuantizedRecorder;
 import otcoteam.tahiti.performance.reporter.LogReporter;
