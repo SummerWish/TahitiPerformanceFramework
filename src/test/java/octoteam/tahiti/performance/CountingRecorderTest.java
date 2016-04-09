@@ -1,6 +1,4 @@
 package octoteam.tahiti.performance;
-
-import com.sun.tools.internal.ws.wsdl.document.jaxws.Exception;
 import otcoteam.tahiti.performance.recorder.CountingRecorder;
 import otcoteam.tahiti.performance.reporter.LogReporter;
 import otcoteam.tahiti.performance.reporter.RollingFileReporter;
