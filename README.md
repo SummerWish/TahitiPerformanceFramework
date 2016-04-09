@@ -1,8 +1,8 @@
 # TahitiPerformanceMonitor
 
-[![Build Status](https://travis-ci.org/SummerWish/TahitiPerformanceMonitor.svg?branch=master&style=flat)](https://travis-ci.org/SummerWish/TahitiPerformanceMonitor)
-[![Coverage Status](https://coveralls.io/repos/github/SummerWish/TahitiPerformanceMonitor/badge.svg?branch=master&style=flat)](https://coveralls.io/github/SummerWish/TahitiPerformanceMonitor?branch=master)
-[![Dependency Status](https://www.versioneye.com/user/projects/57091970fcd19a0045440822/badge.svg?style=flat)](https://www.versioneye.com/user/projects/57091970fcd19a0045440822)
+[![Build Status](https://travis-ci.org/SummerWish/TahitiPerformanceMonitor.svg?branch=master)](https://travis-ci.org/SummerWish/TahitiPerformanceMonitor)
+[![Coverage Status](https://coveralls.io/repos/github/SummerWish/TahitiPerformanceMonitor/badge.svg?branch=master)](https://coveralls.io/github/SummerWish/TahitiPerformanceMonitor?branch=master)
+[![Dependency Status](https://www.versioneye.com/user/projects/57091970fcd19a0045440822/badge.svg)](https://www.versioneye.com/user/projects/57091970fcd19a0045440822)
 
 一个简单的性能监控库。
 
