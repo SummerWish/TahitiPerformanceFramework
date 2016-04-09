@@ -4,7 +4,7 @@
 
 - 支持统计多种性能指标（次数、均值、最大值、最小值）
 
-- 支持定时生成性能报告（支持追加方式或分文件方式）
+- 支持定时生成性能日志（支持追加方式或分文件方式）
 
 ## 下载
 
@@ -22,7 +22,7 @@ TODO
 
 ## 示例
 
-### 每分钟统计各个指标次数，并每分钟写入新报告文件
+### 每分钟统计各个指标次数，并每分钟写入新日志文件
 
 ```java
 import otcoteam.tahiti.performance.recorder.CountingRecorder;
@@ -36,9 +36,9 @@ import java.util.concurrent.TimeUnit;
 public class PerMiniuteCountingExample {
 
     public static void main(String args[]) {
-        // 首先需要一个报告生成器, 此处我们建立 RollingFileReporter, 即
+        // 首先需要一个日志生成器, 此处我们建立 RollingFileReporter, 即
         // 生成报告到一组文件中. 由于时间输出格式是 yyyy-MM-dd_HH-mm, 因
-        // 此将每分钟生成一个新文件.
+        // 此将每分钟生成一个新的日志文件.
         LogReporter reporter = new RollingFileReporter("bar-%d{yyyy-MM-dd_HH-mm}.log");
 
         // 接下来创建性能监控实例
@@ -49,7 +49,7 @@ public class PerMiniuteCountingExample {
         monitor.addRecorder("request", new CountingRecorder("Request times"));
         monitor.addRecorder("login", new CountingRecorder("User login times"));
 
-        // 开始定时报告, 此处是每 1 分钟统计一次.
+        // 开始定时生成日志文件, 此处是每 1 分钟统计一次.
         monitor.start(1, TimeUnit.MINUTES);
 
         // 以下模拟每 5 秒有一次 request
@@ -73,7 +73,7 @@ public class PerMiniuteCountingExample {
 
 运行后，请查看当前目录下 `foo-xxxx-xx-xx_xx-xx.log`。每分钟都有一个日志文件，且每个日志文件都包含一分钟内 `request` 和 `login` 指标统计到的次数。
 
-### 每分钟统计指标均值和最值，并写入报告到同一个文件
+### 每分钟统计指标均值和最值，并写入日志记录到同一个文件
 
 ```java
 // TODO

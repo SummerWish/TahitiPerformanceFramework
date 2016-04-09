@@ -7,7 +7,7 @@ import ch.qos.logback.classic.encoder.PatternLayoutEncoder;
 import org.slf4j.LoggerFactory;
 
 /**
- * 封装了日志生成器，
+ * 封装了日志生成器，用于记录并生成性能日志
  */
 public abstract class LogReporter {
 

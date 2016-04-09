@@ -5,19 +5,19 @@ import ch.qos.logback.core.rolling.RollingFileAppender;
 import ch.qos.logback.core.rolling.TimeBasedRollingPolicy;
 
 /**
- * TODO
+ * 以分文件的方式生成日志
  */
 public class RollingFileReporter extends LogReporter {
 
     /**
-     * TODO
+     * 日志生成器
      */
     protected Logger logger;
 
     /**
-     * TODO
+     * 初始化日志生成器
      *
-     * @param fileNamePattern
+     * @param fileNamePattern 日志文件名称的格式
      */
     public RollingFileReporter(String fileNamePattern) {
         RollingFileAppender fileAppender = new RollingFileAppender();

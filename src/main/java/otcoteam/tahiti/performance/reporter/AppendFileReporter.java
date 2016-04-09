@@ -5,19 +5,19 @@ import ch.qos.logback.core.FileAppender;
 import ch.qos.logback.core.rolling.RollingFileAppender;
 
 /**
- * TODO
+ * 以追加文件的方式生成日志记录
  */
 public class AppendFileReporter extends LogReporter {
 
     /**
-     * TODO
+     * 日志生成器
      */
     protected Logger logger;
 
     /**
-     * TODO
+     * 初始化日志生成器
      *
-     * @param fileName
+     * @param fileName 需要追加日志记录的文件名
      */
     public AppendFileReporter(String fileName) {
         FileAppender fileAppender = new RollingFileAppender();

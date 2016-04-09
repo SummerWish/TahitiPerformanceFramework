@@ -13,31 +13,31 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
- * TODO
+ * 用于管理性能监测与生成日志记录
  */
 public class PerformanceMonitor {
 
     /**
-     * TODO
+     * 启动状态
      */
     private boolean started = false;
 
     /**
-     * TODO
+     * 日志生成器
      */
     private Logger logger = null;
 
     /**
-     * TODO
+     * 指标记录器的集合
      */
     private HashMap<String, MeasurementRecorder> recorders = new HashMap<String, MeasurementRecorder>();
 
     /**
-     * TODO
+     * 初始化
      *
-     * @param reporter
-     * @param period
-     * @param unit
+     * @param reporter 封装了日志生成器
+     * @param period 生成日志的时间间隔
+     * @param unit 时间单位
      */
     public PerformanceMonitor(LogReporter reporter, long period, TimeUnit unit) {
         this(reporter);
@@ -45,19 +45,19 @@ public class PerformanceMonitor {
     }
 
     /**
-     * TODO
+     * 初始化
      *
-     * @param reporter
+     * @param reporter 封装了日志生成器
      */
     public PerformanceMonitor(LogReporter reporter) {
         logger = reporter.getLogger();
     }
 
     /**
-     * TODO
+     * 开始性能检测并定时生成日志
      *
-     * @param period
-     * @param unit
+     * @param period 生成日志的时间间隔
+     * @param unit 时间单位
      */
     public void start(long period, TimeUnit unit) {
         if (started) {
@@ -73,19 +73,19 @@ public class PerformanceMonitor {
     }
 
     /**
-     * TODO
+     * 添加指标记录器
      *
-     * @param key
-     * @param recorder
+     * @param key 用于标识指标记录器的关键字
+     * @param recorder 指标记录器
      */
     public void addRecorder(String key, MeasurementRecorder recorder) {
         recorders.put(key, recorder);
     }
 
     /**
-     * TODO
+     * 记录指标数值
      *
-     * @param key
+     * @param key 用于标识指标记录器的关键字
      */
     public void record(String key) {
         if (!recorders.containsKey(key)) {
@@ -99,10 +99,10 @@ public class PerformanceMonitor {
     }
 
     /**
-     * TODO
+     * 记录指标数值
      *
-     * @param key
-     * @param value
+     * @param key 用于标识指标记录器的关键字
+     * @param value 指标值
      */
     public void record(String key, double value) {
         if (!recorders.containsKey(key)) {
@@ -116,14 +116,14 @@ public class PerformanceMonitor {
     }
 
     /**
-     * TODO
+     * 是否已经启动
      */
     public boolean isStarted() {
         return started;
     }
 
     /**
-     * TODO
+     * 生成报告日志
      */
     protected void report() {
         for (Map.Entry<String, MeasurementRecorder> entry : recorders.entrySet()) {
