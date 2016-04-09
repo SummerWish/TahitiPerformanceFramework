@@ -7,7 +7,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-public class PerMiniuteCountingExample {
+public class PerMinuteCountingExample {
 
     public static void main(String args[]) {
         // 首先需要一个报告生成器, 此处我们建立 RollingFileReporter, 即

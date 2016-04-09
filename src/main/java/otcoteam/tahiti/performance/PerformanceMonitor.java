@@ -36,8 +36,8 @@ public class PerformanceMonitor {
      * 初始化
      *
      * @param reporter 封装了日志生成器
-     * @param period 生成日志的时间间隔
-     * @param unit 时间单位
+     * @param period   生成日志的时间间隔
+     * @param unit     时间单位
      */
     public PerformanceMonitor(LogReporter reporter, long period, TimeUnit unit) {
         this(reporter);
@@ -57,7 +57,7 @@ public class PerformanceMonitor {
      * 开始性能检测并定时生成日志
      *
      * @param period 生成日志的时间间隔
-     * @param unit 时间单位
+     * @param unit   时间单位
      */
     public void start(long period, TimeUnit unit) {
         if (started) {
@@ -75,7 +75,7 @@ public class PerformanceMonitor {
     /**
      * 添加指标记录器
      *
-     * @param key 用于标识指标记录器的关键字
+     * @param key      用于标识指标记录器的关键字
      * @param recorder 指标记录器
      */
     public void addRecorder(String key, MeasurementRecorder recorder) {
@@ -101,7 +101,7 @@ public class PerformanceMonitor {
     /**
      * 记录指标数值
      *
-     * @param key 用于标识指标记录器的关键字
+     * @param key   用于标识指标记录器的关键字
      * @param value 指标值
      */
     public void record(String key, double value) {

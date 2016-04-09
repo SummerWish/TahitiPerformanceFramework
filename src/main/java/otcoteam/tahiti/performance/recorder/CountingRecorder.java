@@ -18,7 +18,7 @@ public class CountingRecorder extends MeasurementRecorder {
     /**
      * 初始化计数器
      *
-     * @param name  指标名称
+     * @param name 指标名称
      */
     public CountingRecorder(String name) {
         this.name = name;
@@ -32,7 +32,7 @@ public class CountingRecorder extends MeasurementRecorder {
 
     @Override
     public String getReport() {
-        return counter+"";
+        return Long.toString(counter);
     }
 
     @Override

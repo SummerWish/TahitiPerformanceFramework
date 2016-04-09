@@ -20,7 +20,7 @@ public class AppendFileReporter extends LogReporter {
      * @param fileName 需要追加日志记录的文件名
      */
     public AppendFileReporter(String fileName) {
-        FileAppender fileAppender = new RollingFileAppender();
+        FileAppender fileAppender = new FileAppender();
         fileAppender.setContext(getLoggerContext());
         fileAppender.setFile(fileName);
         fileAppender.setEncoder(createEncoder());

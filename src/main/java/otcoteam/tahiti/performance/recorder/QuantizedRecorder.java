@@ -53,7 +53,7 @@ public class QuantizedRecorder extends MeasurementRecorder {
     /**
      * 初始化记录器
      *
-     * @param name 指标名称
+     * @param name         指标名称
      * @param outputFields 数值类型
      */
     public QuantizedRecorder(String name, EnumSet<OutputField> outputFields) {
@@ -84,11 +84,11 @@ public class QuantizedRecorder extends MeasurementRecorder {
             avg = sum / records.size();
         }
 
-        HashMap<String, Double> fields = new HashMap<String, Double>();
-        if (outputFields.contains(OutputField.AVERAGE)) fields.put("average", avg);
-        if (outputFields.contains(OutputField.SUM)) fields.put("sum", sum);
-        if (outputFields.contains(OutputField.MIN)) fields.put("min", min);
-        if (outputFields.contains(OutputField.MAX)) fields.put("max", max);
+        HashMap<String, String> fields = new HashMap<String, String>();
+        if (outputFields.contains(OutputField.AVERAGE)) fields.put("average", String.format("%.2f", avg));
+        if (outputFields.contains(OutputField.SUM)) fields.put("sum", String.format("%.2f", sum));
+        if (outputFields.contains(OutputField.MIN)) fields.put("min", String.format("%.2f", min));
+        if (outputFields.contains(OutputField.MAX)) fields.put("max", String.format("%.2f", max));
 
         return fields.toString();
     }
