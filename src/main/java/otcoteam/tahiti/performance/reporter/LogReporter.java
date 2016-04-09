@@ -7,35 +7,35 @@ import ch.qos.logback.classic.encoder.PatternLayoutEncoder;
 import org.slf4j.LoggerFactory;
 
 /**
- * ·â×°ÁËÈÕÖ¾Éú³ÉÆ÷£¬ÓÃÓÚ¼ÇÂ¼²¢Éú³ÉĞÔÄÜÈÕÖ¾
+ * å°è£…äº†æ—¥å¿—ç”Ÿæˆå™¨ï¼Œç”¨äºè®°å½•å¹¶ç”Ÿæˆæ€§èƒ½æ—¥å¿—
  */
 public abstract class LogReporter {
 
     /**
-     * ÈÕÖ¾Éú³ÉÆ÷»·¾³
+     * æ—¥å¿—ç”Ÿæˆå™¨ç¯å¢ƒ
      */
     private LoggerContext context = (LoggerContext) LoggerFactory.getILoggerFactory();
 
     /**
-     * ·µ»ØÈÕÖ¾Éú³ÉÆ÷
+     * è¿”å›æ—¥å¿—ç”Ÿæˆå™¨
      *
-     * @return logger ÈÕÖ¾Éú³ÉÆ÷
+     * @return logger æ—¥å¿—ç”Ÿæˆå™¨
      */
     public abstract Logger getLogger();
 
     /**
-     * ·µ»ØÈÕÖ¾Éú³ÉÆ÷»·¾³
+     * è¿”å›æ—¥å¿—ç”Ÿæˆå™¨ç¯å¢ƒ
      *
-     * @return context ÈÕÖ¾Éú³ÉÆ÷»·¾³
+     * @return context æ—¥å¿—ç”Ÿæˆå™¨ç¯å¢ƒ
      */
     protected final LoggerContext getLoggerContext() {
         return context;
     }
 
     /**
-     * ´´½¨ÈÕÖ¾ÄÚ¼ÇÂ¼µÄ¸ñÊ½
+     * åˆ›å»ºæ—¥å¿—å†…è®°å½•çš„æ ¼å¼
      *
-     * @return encoder ÓÃÓÚ¼ÇÂ¼µÄ¸ñÊ½
+     * @return encoder ç”¨äºè®°å½•çš„æ ¼å¼
      */
     protected PatternLayoutEncoder createEncoder() {
         PatternLayoutEncoder encoder = new PatternLayoutEncoder();
@@ -47,9 +47,9 @@ public abstract class LogReporter {
     }
 
     /**
-     * ´´½¨ÈÕÖ¾Éú³ÉÆ÷£¬Ä¬ÈÏ¼ÇÂ¼ËùÓĞ¼¶±ğµÄÈÕÖ¾
+     * åˆ›å»ºæ—¥å¿—ç”Ÿæˆå™¨ï¼Œé»˜è®¤è®°å½•æ‰€æœ‰çº§åˆ«çš„æ—¥å¿—
      *
-     * @return logger ÈÕÖ¾Éú³ÉÆ÷
+     * @return logger æ—¥å¿—ç”Ÿæˆå™¨
      */
     protected Logger createLogger() {
         Logger logger = (Logger) LoggerFactory.getLogger(LogReporter.class);

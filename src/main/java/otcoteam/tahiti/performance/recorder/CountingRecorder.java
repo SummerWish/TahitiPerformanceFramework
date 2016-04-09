@@ -1,24 +1,24 @@
 package otcoteam.tahiti.performance.recorder;
 
 /**
- * ÓÃÓÚ¶ÔÖ¸¶¨Ö¸±ê¼ÆÊı
+ * ç”¨äºå¯¹æŒ‡å®šæŒ‡æ ‡è®¡æ•°
  */
 public class CountingRecorder extends MeasurementRecorder {
 
     /**
-     * Ö¸±êÃû³Æ
+     * æŒ‡æ ‡åç§°
      */
     private String name;
 
     /**
-     * Ö¸±ê¼ÆÊı
+     * æŒ‡æ ‡è®¡æ•°
      */
     private long counter;
 
     /**
-     * ³õÊ¼»¯¼ÆÊıÆ÷
+     * åˆå§‹åŒ–è®¡æ•°å™¨
      *
-     * @param name  Ö¸±êÃû³Æ
+     * @param name  æŒ‡æ ‡åç§°
      */
     public CountingRecorder(String name) {
         this.name = name;
@@ -41,7 +41,7 @@ public class CountingRecorder extends MeasurementRecorder {
     }
 
     /**
-     * ¼ÆÊı
+     * è®¡æ•°
      */
     public void record() {
         counter++;

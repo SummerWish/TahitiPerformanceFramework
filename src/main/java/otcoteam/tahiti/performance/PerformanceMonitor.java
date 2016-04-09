@@ -13,31 +13,31 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
- * ÓÃÓÚ¹ÜÀíĞÔÄÜ¼à²âÓëÉú³ÉÈÕÖ¾¼ÇÂ¼
+ * ç”¨äºç®¡ç†æ€§èƒ½ç›‘æµ‹ä¸ç”Ÿæˆæ—¥å¿—è®°å½•
  */
 public class PerformanceMonitor {
 
     /**
-     * Æô¶¯×´Ì¬
+     * å¯åŠ¨çŠ¶æ€
      */
     private boolean started = false;
 
     /**
-     * ÈÕÖ¾Éú³ÉÆ÷
+     * æ—¥å¿—ç”Ÿæˆå™¨
      */
     private Logger logger = null;
 
     /**
-     * Ö¸±ê¼ÇÂ¼Æ÷µÄ¼¯ºÏ
+     * æŒ‡æ ‡è®°å½•å™¨çš„é›†åˆ
      */
     private HashMap<String, MeasurementRecorder> recorders = new HashMap<String, MeasurementRecorder>();
 
     /**
-     * ³õÊ¼»¯
+     * åˆå§‹åŒ–
      *
-     * @param reporter ·â×°ÁËÈÕÖ¾Éú³ÉÆ÷
-     * @param period Éú³ÉÈÕÖ¾µÄÊ±¼ä¼ä¸ô
-     * @param unit Ê±¼äµ¥Î»
+     * @param reporter å°è£…äº†æ—¥å¿—ç”Ÿæˆå™¨
+     * @param period ç”Ÿæˆæ—¥å¿—çš„æ—¶é—´é—´éš”
+     * @param unit æ—¶é—´å•ä½
      */
     public PerformanceMonitor(LogReporter reporter, long period, TimeUnit unit) {
         this(reporter);
@@ -45,19 +45,19 @@ public class PerformanceMonitor {
     }
 
     /**
-     * ³õÊ¼»¯
+     * åˆå§‹åŒ–
      *
-     * @param reporter ·â×°ÁËÈÕÖ¾Éú³ÉÆ÷
+     * @param reporter å°è£…äº†æ—¥å¿—ç”Ÿæˆå™¨
      */
     public PerformanceMonitor(LogReporter reporter) {
         logger = reporter.getLogger();
     }
 
     /**
-     * ¿ªÊ¼ĞÔÄÜ¼ì²â²¢¶¨Ê±Éú³ÉÈÕÖ¾
+     * å¼€å§‹æ€§èƒ½æ£€æµ‹å¹¶å®šæ—¶ç”Ÿæˆæ—¥å¿—
      *
-     * @param period Éú³ÉÈÕÖ¾µÄÊ±¼ä¼ä¸ô
-     * @param unit Ê±¼äµ¥Î»
+     * @param period ç”Ÿæˆæ—¥å¿—çš„æ—¶é—´é—´éš”
+     * @param unit æ—¶é—´å•ä½
      */
     public void start(long period, TimeUnit unit) {
         if (started) {
@@ -73,19 +73,19 @@ public class PerformanceMonitor {
     }
 
     /**
-     * Ìí¼ÓÖ¸±ê¼ÇÂ¼Æ÷
+     * æ·»åŠ æŒ‡æ ‡è®°å½•å™¨
      *
-     * @param key ÓÃÓÚ±êÊ¶Ö¸±ê¼ÇÂ¼Æ÷µÄ¹Ø¼ü×Ö
-     * @param recorder Ö¸±ê¼ÇÂ¼Æ÷
+     * @param key ç”¨äºæ ‡è¯†æŒ‡æ ‡è®°å½•å™¨çš„å…³é”®å­—
+     * @param recorder æŒ‡æ ‡è®°å½•å™¨
      */
     public void addRecorder(String key, MeasurementRecorder recorder) {
         recorders.put(key, recorder);
     }
 
     /**
-     * ¼ÇÂ¼Ö¸±êÊıÖµ
+     * è®°å½•æŒ‡æ ‡æ•°å€¼
      *
-     * @param key ÓÃÓÚ±êÊ¶Ö¸±ê¼ÇÂ¼Æ÷µÄ¹Ø¼ü×Ö
+     * @param key ç”¨äºæ ‡è¯†æŒ‡æ ‡è®°å½•å™¨çš„å…³é”®å­—
      */
     public void record(String key) {
         if (!recorders.containsKey(key)) {
@@ -99,10 +99,10 @@ public class PerformanceMonitor {
     }
 
     /**
-     * ¼ÇÂ¼Ö¸±êÊıÖµ
+     * è®°å½•æŒ‡æ ‡æ•°å€¼
      *
-     * @param key ÓÃÓÚ±êÊ¶Ö¸±ê¼ÇÂ¼Æ÷µÄ¹Ø¼ü×Ö
-     * @param value Ö¸±êÖµ
+     * @param key ç”¨äºæ ‡è¯†æŒ‡æ ‡è®°å½•å™¨çš„å…³é”®å­—
+     * @param value æŒ‡æ ‡å€¼
      */
     public void record(String key, double value) {
         if (!recorders.containsKey(key)) {
@@ -116,14 +116,14 @@ public class PerformanceMonitor {
     }
 
     /**
-     * ÊÇ·ñÒÑ¾­Æô¶¯
+     * æ˜¯å¦å·²ç»å¯åŠ¨
      */
     public boolean isStarted() {
         return started;
     }
 
     /**
-     * Éú³É±¨¸æÈÕÖ¾
+     * ç”ŸæˆæŠ¥å‘Šæ—¥å¿—
      */
     protected void report() {
         for (Map.Entry<String, MeasurementRecorder> entry : recorders.entrySet()) {

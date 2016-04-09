@@ -1,26 +1,26 @@
 package otcoteam.tahiti.performance.recorder;
 
 /**
- * 所有用来记录指标性能的类都应该继承这个类
+ * 鎵�鏈夌敤鏉ヨ褰曟寚鏍囨�ц兘鐨勭被閮藉簲璇ョ户鎵胯繖涓被
  */
 public abstract class MeasurementRecorder {
 
     /**
-     * 返回指标名称
+     * 杩斿洖鎸囨爣鍚嶇О
      *
-     * @return name 指标名称
+     * @return name 鎸囨爣鍚嶇О
      */
     public abstract String getName();
 
     /**
-     * 重置该指标对应的记录
+     * 閲嶇疆璇ユ寚鏍囧搴旂殑璁板綍
      */
     public abstract void reset();
 
     /**
-     * 返回该指标的记录报告
+     * 杩斿洖璇ユ寚鏍囩殑璁板綍鎶ュ憡
      *
-     * @return report 记录报告
+     * @return report 璁板綍鎶ュ憡
      */
     public abstract String getReport();
 

@@ -10,23 +10,23 @@ import java.util.concurrent.TimeUnit;
 public class PerMiniuteCountingExample {
 
     public static void main(String args[]) {
-        // Ê×ÏÈĞèÒªÒ»¸ö±¨¸æÉú³ÉÆ÷, ´Ë´¦ÎÒÃÇ½¨Á¢ RollingFileReporter, ¼´
-        // Éú³É±¨¸æµ½Ò»×éÎÄ¼şÖĞ. ÓÉÓÚÊ±¼äÊä³ö¸ñÊ½ÊÇ yyyy-MM-dd_HH-mm, Òò
-        // ´Ë½«Ã¿·ÖÖÓÉú³ÉÒ»¸öĞÂÎÄ¼ş.
+        // é¦–å…ˆéœ€è¦ä¸€ä¸ªæŠ¥å‘Šç”Ÿæˆå™¨, æ­¤å¤„æˆ‘ä»¬å»ºç«‹ RollingFileReporter, å³
+        // ç”ŸæˆæŠ¥å‘Šåˆ°ä¸€ç»„æ–‡ä»¶ä¸­. ç”±äºæ—¶é—´è¾“å‡ºæ ¼å¼æ˜¯ yyyy-MM-dd_HH-mm, å› 
+        // æ­¤å°†æ¯åˆ†é’Ÿç”Ÿæˆä¸€ä¸ªæ–°æ–‡ä»¶.
         LogReporter reporter = new RollingFileReporter("bar-%d{yyyy-MM-dd_HH-mm}.log");
 
-        // ½ÓÏÂÀ´´´½¨ĞÔÄÜ¼à¿ØÊµÀı
+        // æ¥ä¸‹æ¥åˆ›å»ºæ€§èƒ½ç›‘æ§å®ä¾‹
         final PerformanceMonitor monitor = new PerformanceMonitor(reporter);
 
-        // ¶ÔÓÚÒªÍ³¼ÆµÄÖ¸±ê, ĞèÒª½øĞĞ³õÊ¼»¯. ´Ë´¦Ê¹ÓÃ CountingRecorder, ¼´
-        // ¼ÆÊıĞÍÖ¸±ê. ¶ÔÓÚ¼ÆÊıĞÍÖ¸±ê, ±¨¸æÊ±½«ÀÛ¼ÓÕâ¶ÎÊ±¼äÄÚµÄ¼ÇÂ¼´ÎÊı.
+        // å¯¹äºè¦ç»Ÿè®¡çš„æŒ‡æ ‡, éœ€è¦è¿›è¡Œåˆå§‹åŒ–. æ­¤å¤„ä½¿ç”¨ CountingRecorder, å³
+        // è®¡æ•°å‹æŒ‡æ ‡. å¯¹äºè®¡æ•°å‹æŒ‡æ ‡, æŠ¥å‘Šæ—¶å°†ç´¯åŠ è¿™æ®µæ—¶é—´å†…çš„è®°å½•æ¬¡æ•°.
         monitor.addRecorder("request", new CountingRecorder("Request times"));
         monitor.addRecorder("login", new CountingRecorder("User login times"));
 
-        // ¿ªÊ¼¶¨Ê±±¨¸æ, ´Ë´¦ÊÇÃ¿ 1 ·ÖÖÓÍ³¼ÆÒ»´Î.
+        // å¼€å§‹å®šæ—¶æŠ¥å‘Š, æ­¤å¤„æ˜¯æ¯ 1 åˆ†é’Ÿç»Ÿè®¡ä¸€æ¬¡.
         monitor.start(1, TimeUnit.MINUTES);
 
-        // ÒÔÏÂÄ£ÄâÃ¿ 5 ÃëÓĞÒ»´Î request
+        // ä»¥ä¸‹æ¨¡æ‹Ÿæ¯ 5 ç§’æœ‰ä¸€æ¬¡ request
         ScheduledExecutorService executorService = new ScheduledThreadPoolExecutor(1);
         executorService.scheduleAtFixedRate(new Runnable() {
             public void run() {
@@ -34,7 +34,7 @@ public class PerMiniuteCountingExample {
             }
         }, 5, 5, TimeUnit.SECONDS);
 
-        // ÒÔÏÂÄ£ÄâÃ¿ 10 ÃëÓĞÒ»´Î login
+        // ä»¥ä¸‹æ¨¡æ‹Ÿæ¯ 10 ç§’æœ‰ä¸€æ¬¡ login
         executorService.scheduleAtFixedRate(new Runnable() {
             public void run() {
                 monitor.record("login");
