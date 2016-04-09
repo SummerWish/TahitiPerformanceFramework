@@ -76,5 +76,73 @@ public class PerMiniuteCountingExample {
 ### 每分钟统计指标均值和最值，并写入日志记录到同一个文件
 
 ```java
-// TODO
+import otcoteam.tahiti.performance.PerformanceMonitor;
+import otcoteam.tahiti.performance.recorder.QuantizedRecorder;
+import otcoteam.tahiti.performance.reporter.LogReporter;
+import otcoteam.tahiti.performance.reporter.RollingFileReporter;
+
+import java.util.EnumSet;
+import java.util.Random;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+
+public class PerformanceQuantizedExample {
+    public static void main(String[] args) {
+
+        // 实例化日志生成器，以每分钟新建日志文件的方式记录日志
+        LogReporter reporter = new RollingFileReporter("foo-%d{yyyy-MM-dd_HH-mm}.log");
+
+        // 性能监控实例
+        final PerformanceMonitor monitor = new PerformanceMonitor(reporter);
+
+        // 指定记录每分钟内请求（request）的需要记录的数值
+        // 包括：总值，最大值，最小值，平均值
+        EnumSet<QuantizedRecorder.OutputField> requestQuantizedFields =
+                EnumSet.of(
+                        QuantizedRecorder.OutputField.SUM,
+                        QuantizedRecorder.OutputField.MAX,
+                        QuantizedRecorder.OutputField.MIN,
+                        QuantizedRecorder.OutputField.AVERAGE
+                        );
+        // 指定记录每分钟内登陆（login）的需要记录的数值
+        // 包括：最大值，最小值
+        EnumSet<QuantizedRecorder.OutputField> loginQuantizedFields =
+                EnumSet.of(
+                        QuantizedRecorder.OutputField.MAX,
+                        QuantizedRecorder.OutputField.MIN
+                );
+
+        // 在性能监控实例中添加 request 和 login 的数值记录器
+        monitor.addRecorder("request", new QuantizedRecorder("Request quantize",requestQuantizedFields));
+        monitor.addRecorder("login", new QuantizedRecorder("Login quantize", loginQuantizedFields));
+
+        // 开始性能监控
+        monitor.start(1, TimeUnit.MINUTES);
+
+        // 以下模拟每 5 秒记录一次请求（request） 数据
+        ScheduledExecutorService executorService = new ScheduledThreadPoolExecutor(1);
+        final Random r = new Random();
+        executorService.scheduleAtFixedRate(
+                new Runnable() {
+                    public void run() {
+                        monitor.record("request", r.nextDouble());
+                    }
+                },
+                5, 5, TimeUnit.SECONDS
+        );
+
+        // 以下模拟每 10 秒记录一次登陆（login）数据
+        executorService.scheduleAtFixedRate(
+                new Runnable() {
+                    public void run() {
+                        monitor.record("login", r.nextDouble());
+                    }
+                },
+                10, 10, TimeUnit.SECONDS
+        );
+
+    }
+}
+
 ```
