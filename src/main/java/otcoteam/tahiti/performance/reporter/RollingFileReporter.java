@@ -23,13 +23,16 @@ public class RollingFileReporter extends LogReporter {
         RollingFileAppender fileAppender = new RollingFileAppender();
         fileAppender.setContext(getLoggerContext());
         fileAppender.setEncoder(createEncoder());
-        fileAppender.start();
 
         TimeBasedRollingPolicy policy = new TimeBasedRollingPolicy();
         policy.setContext(getLoggerContext());
         policy.setParent(fileAppender);
         policy.setFileNamePattern(fileNamePattern);
+
+        fileAppender.setRollingPolicy(policy);
+
         policy.start();
+        fileAppender.start();
 
         logger = createLogger();
         logger.addAppender(fileAppender);
