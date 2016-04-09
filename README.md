@@ -1,24 +1,71 @@
 # TahitiPerformanceMonitor
 
+[![Build Status](https://travis-ci.org/SummerWish/TahitiPerformanceMonitor.svg?branch=master)](https://travis-ci.org/SummerWish/TahitiPerformanceMonitor) [![Coverage Status](https://coveralls.io/repos/github/SummerWish/TahitiPerformanceMonitor/badge.svg?branch=master)](https://coveralls.io/github/SummerWish/TahitiPerformanceMonitor?branch=master)
+
 一个简单的性能监控库。
 
-- 支持统计多种性能指标（次数、均值、最大值、最小值）
+该监控库支持监控统计两类指标：
 
-- 支持定时生成性能日志（支持追加方式或分文件方式）
+- 次数指标 (`CountingRecorder`)，报表中反馈出来的是每个周期次数总和（例如统计一分钟内用户登录了多少次）
+
+- 数值指标 (`QuantizedRecorder`)，报表中反馈出来的是每个周期数值的累加、平均、最值等（例如统计每天同时在线人数的最大值和平均值）
+
+该监控库还支持两种报告写入方式：
+
+- 按指定周期写入不同日志 (`RollingFileReporter`)，每个周期的报表按时间写入不同日志中（如每天一个文件、每小时一个文件、每分钟一个文件等）
+
+- 追加写入同一个日志 (`AppendFileReporter`)，每个周期的报表都会写入到同一个日志中
 
 ## 下载
 
 ### Maven
 
-您可以使用 Maven 下载这个库到您的项目中：
+您可以使用 Maven 下载这个库到您的项目中。请在 pom.xml 中添加我们的 repository 和这个项目：
 
-TODO
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <!-- 此处可以有其他内容，已省略 -->
+    
+    <repositories>
+        <repository>
+            <id>tahiti</id>
+            <url>http://10.60.40.241:8888/repository/internal/</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <!-- 此处可以有其他内容，已省略 -->
+        <dependency>
+            <groupId>octoteam.tahiti</groupId>
+            <artifactId>performance</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
+</project>
+```
 
 ### 手工下载
 
-TahitiPerformanceMonitor 依赖于 logback 写入日志。
+TahitiPerformanceMonitor 依赖于 [logback](http://logback.qos.ch/) 写入日志。您需要将以下 jar 全部下载下来添加到项目中：
 
-TODO
+- [logback-classic](http://central.maven.org/maven2/ch/qos/logback/logback-classic/1.1.6/logback-classic-1.1.6.jar)
+
+- [logback-core](http://central.maven.org/maven2/ch/qos/logback/logback-core/1.1.6/logback-core-1.1.6.jar)
+
+- [slf4j-api](http://central.maven.org/maven2/org/slf4j/slf4j-api/1.7.18/slf4j-api-1.7.18.jar)
+
+- [performance](http://10.60.40.241:8888/repository/snapshots/octoteam/tahiti/performance/1.0-SNAPSHOT/performance-1.0-20160409.110112-1.jar)
 
 ## 示例
 
