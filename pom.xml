@@ -24,9 +24,9 @@
 
     <distributionManagement>
         <snapshotRepository>
-            <id>archiva.snapshots</id>
+            <id>tahiti-snapshots</id>
             <name>Tahiti Snapshot Repository</name>
-            <url>http://10.60.40.241:8888/repository/snapshots/</url>
+            <url>http://sse.tongji.edu.cn/tahiti/nexus/content/repositories/snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
 
@@ -50,6 +50,19 @@
                         <id>prepare-agent</id>
                         <goals>
                             <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
                         </goals>
                     </execution>
                 </executions>

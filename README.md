@@ -34,14 +34,11 @@
     
     <repositories>
         <repository>
-            <id>tahiti</id>
-            <url>http://10.60.40.241:8888/repository/internal/</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
+            <id>tahiti-nexus-snapshots</id>
+            <name>Tahiti NEXUS</name>
+            <url>http://sse.tongji.edu.cn/tahiti/nexus/content/groups/public</url>
+            <releases><enabled>false</enabled></releases>
+            <snapshots><enabled>true</enabled></snapshots>
         </repository>
     </repositories>
 
@@ -59,7 +56,7 @@
 
 ### 手工下载
 
-- [tahiti-performance](http://10.60.40.241:8888/repository/snapshots/octoteam/tahiti/tahiti-performance/1.0-SNAPSHOT/tahiti-performance-1.0-20160409.155043-1.jar)
+- [tahiti-performance](http://sse.tongji.edu.cn/tahiti/nexus/service/local/repositories/public/content/octoteam/tahiti/tahiti-performance/1.0-SNAPSHOT/tahiti-performance-1.0-20160409.184315-1.jar)
 
 除了这个库本身以外，TahitiPerformanceMonitor 还依赖于 [logback](http://logback.qos.ch/) 写入日志。您需要将以下 jar 全部下载下来添加到项目中：
 
