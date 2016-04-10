@@ -1,7 +1,7 @@
 package otcoteam.tahiti.performance.reporter;
 
-import ch.qos.logback.classic.Logger;
 import ch.qos.logback.core.FileAppender;
+import org.slf4j.Logger;
 
 /**
  * 以追加文件的方式生成日志记录
@@ -25,9 +25,8 @@ public class AppendFileReporter extends LogReporter {
         fileAppender.setEncoder(createEncoder());
         fileAppender.start();
         logger = createLogger();
-        logger.addAppender(fileAppender);
+        ((ch.qos.logback.classic.Logger) logger).addAppender(fileAppender);
     }
-
 
     @Override
     public Logger getLogger() {

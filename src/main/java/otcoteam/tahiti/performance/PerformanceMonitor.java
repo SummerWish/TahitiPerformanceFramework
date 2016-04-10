@@ -1,13 +1,11 @@
 package otcoteam.tahiti.performance;
 
-import ch.qos.logback.classic.Logger;
-import otcoteam.tahiti.performance.recorder.CountingRecorder;
+import org.slf4j.Logger;
 import otcoteam.tahiti.performance.recorder.MeasurementRecorder;
-import otcoteam.tahiti.performance.recorder.QuantizedRecorder;
 import otcoteam.tahiti.performance.reporter.LogReporter;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -18,36 +16,24 @@ import java.util.concurrent.TimeUnit;
 public class PerformanceMonitor {
 
     /**
-     * 启动状态
-     */
-    private boolean started = false;
-
-    /**
      * 日志生成器
      */
     private Logger logger = null;
 
     /**
+     * 定时调用服务
+     */
+    private ScheduledExecutorService executorService;
+
+    /**
      * 指标记录器的集合
      */
-    private HashMap<String, MeasurementRecorder> recorders = new HashMap<String, MeasurementRecorder>();
+    private List<MeasurementRecorder> recorders = new LinkedList<MeasurementRecorder>();
 
     /**
      * 初始化
      *
-     * @param reporter 封装了日志生成器
-     * @param period   生成日志的时间间隔
-     * @param unit     时间单位
-     */
-    public PerformanceMonitor(LogReporter reporter, long period, TimeUnit unit) {
-        this(reporter);
-        start(period, unit);
-    }
-
-    /**
-     * 初始化
-     *
-     * @param reporter 封装了日志生成器
+     * @param reporter 日志生成器
      */
     public PerformanceMonitor(LogReporter reporter) {
         logger = reporter.getLogger();
@@ -58,77 +44,60 @@ public class PerformanceMonitor {
      *
      * @param period 生成日志的时间间隔
      * @param unit   时间单位
+     * @return 当前实例供链式调用
      */
-    public void start(long period, TimeUnit unit) {
-        if (started) {
-            return;
+    public PerformanceMonitor start(long period, TimeUnit unit) {
+        if (executorService != null) {
+            return this;
         }
-        started = true;
-        ScheduledExecutorService executorService = new ScheduledThreadPoolExecutor(1);
+        executorService = new ScheduledThreadPoolExecutor(1);
         executorService.scheduleAtFixedRate(new Runnable() {
             public void run() {
                 PerformanceMonitor.this.report();
             }
         }, period, period, unit);
+        return this;
+    }
+
+    /**
+     * 停止定时生成日志
+     *
+     * @return 当前实例供链式调用
+     */
+    public PerformanceMonitor stop() {
+        if (executorService == null) {
+            return this;
+        }
+        executorService.shutdownNow();
+        executorService = null;
+        return this;
     }
 
     /**
      * 添加指标记录器
      *
-     * @param key      用于标识指标记录器的关键字
      * @param recorder 指标记录器
+     * @return 当前实例供链式调用
      */
-    public void addRecorder(String key, MeasurementRecorder recorder) {
-        recorders.put(key, recorder);
-    }
-
-    /**
-     * 记录指标数值
-     *
-     * @param key 用于标识指标记录器的关键字
-     */
-    public void record(String key) {
-        if (!recorders.containsKey(key)) {
-            throw new IllegalArgumentException("Recorder not found");
-        }
-        MeasurementRecorder recorder = recorders.get(key);
-        if (!(recorder instanceof CountingRecorder)) {
-            throw new IllegalArgumentException("Not an instance of CountingRecorder");
-        }
-        ((CountingRecorder) recorder).record();
-    }
-
-    /**
-     * 记录指标数值
-     *
-     * @param key   用于标识指标记录器的关键字
-     * @param value 指标值
-     */
-    public void record(String key, double value) {
-        if (!recorders.containsKey(key)) {
-            throw new IllegalArgumentException("Recorder not found");
-        }
-        MeasurementRecorder recorder = recorders.get(key);
-        if (!(recorder instanceof QuantizedRecorder)) {
-            throw new ClassCastException("Not an instance of QuantizedRecorder");
-        }
-        ((QuantizedRecorder) recorder).record(value);
+    public PerformanceMonitor addRecorder(MeasurementRecorder recorder) {
+        recorders.add(recorder);
+        return this;
     }
 
     /**
      * 是否已经启动
      */
     public boolean isStarted() {
-        return started;
+        return executorService != null;
     }
 
     /**
      * 生成报告日志
      */
     protected void report() {
-        for (Map.Entry<String, MeasurementRecorder> entry : recorders.entrySet()) {
-            logger.info(String.format("%s: %s", entry.getValue().getName(), entry.getValue().getReport()));
-            entry.getValue().reset();
+        for (MeasurementRecorder recorder : recorders) {
+            logger.info(String.format("%s: %s", recorder.getName(), recorder.getReport()));
+            recorder.reset();
         }
     }
 

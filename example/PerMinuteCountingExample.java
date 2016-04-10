@@ -20,24 +20,27 @@ public class PerMinuteCountingExample {
 
         // 对于要统计的指标, 需要进行初始化. 此处使用 CountingRecorder, 即
         // 计数型指标. 对于计数型指标, 报告时将累加这段时间内的记录次数.
-        monitor.addRecorder("request", new CountingRecorder("Request times"));
-        monitor.addRecorder("login", new CountingRecorder("User login times"));
+        final CountingRecorder requestTimes = new CountingRecorder("Request times");
+        final CountingRecorder loginTimes = new CountingRecorder("User login times");
 
-        // 开始定时报告, 此处是每 1 分钟统计一次.
-        monitor.start(1, TimeUnit.MINUTES);
+        // 将指标加入监控器, 并开始定时报告, 此处是每 1 分钟统计一次.
+        monitor
+                .addRecorder(requestTimes)
+                .addRecorder(loginTimes)
+                .start(1, TimeUnit.MINUTES);
 
         // 以下模拟每 5 秒有一次 request
         ScheduledExecutorService executorService = new ScheduledThreadPoolExecutor(1);
         executorService.scheduleAtFixedRate(new Runnable() {
             public void run() {
-                monitor.record("request");
+                requestTimes.record();
             }
         }, 5, 5, TimeUnit.SECONDS);
 
         // 以下模拟每 10 秒有一次 login
         executorService.scheduleAtFixedRate(new Runnable() {
             public void run() {
-                monitor.record("login");
+                loginTimes.record();
             }
         }, 10, 10, TimeUnit.SECONDS);
     }

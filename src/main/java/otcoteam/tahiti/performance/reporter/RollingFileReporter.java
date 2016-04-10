@@ -1,8 +1,8 @@
 package otcoteam.tahiti.performance.reporter;
 
-import ch.qos.logback.classic.Logger;
 import ch.qos.logback.core.rolling.RollingFileAppender;
 import ch.qos.logback.core.rolling.TimeBasedRollingPolicy;
+import org.slf4j.Logger;
 
 /**
  * 以分文件的方式生成日志
@@ -35,7 +35,7 @@ public class RollingFileReporter extends LogReporter {
         fileAppender.start();
 
         logger = createLogger();
-        logger.addAppender(fileAppender);
+        ((ch.qos.logback.classic.Logger) logger).addAppender(fileAppender);
     }
 
 
