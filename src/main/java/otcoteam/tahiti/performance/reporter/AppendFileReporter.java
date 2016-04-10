@@ -2,7 +2,6 @@ package otcoteam.tahiti.performance.reporter;
 
 import ch.qos.logback.classic.Logger;
 import ch.qos.logback.core.FileAppender;
-import ch.qos.logback.core.rolling.RollingFileAppender;
 
 /**
  * 以追加文件的方式生成日志记录

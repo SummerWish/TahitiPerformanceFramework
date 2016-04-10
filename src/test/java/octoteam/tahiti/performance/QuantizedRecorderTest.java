@@ -4,8 +4,9 @@ import org.junit.Test;
 import otcoteam.tahiti.performance.recorder.QuantizedRecorder;
 
 import java.util.EnumSet;
-import java.util.Random;
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 
 public class QuantizedRecorderTest {
@@ -16,12 +17,12 @@ public class QuantizedRecorderTest {
     ));
 
     @Test
-    public void testGetName(){
-        assertEquals("Usage",qRecorder.getName());
+    public void testGetName() {
+        assertEquals("Usage", qRecorder.getName());
     }
 
     @Test
-    public void testRecord(){
+    public void testRecord() {
         qRecorder.record(10);
         qRecorder.record(100);
         qRecorder.record(70);
@@ -31,7 +32,7 @@ public class QuantizedRecorderTest {
     }
 
     @Test
-    public void testReset(){
+    public void testReset() {
         qRecorder.reset();
         assertTrue(qRecorder.getReport().contains("average=NaN"));
         assertTrue(qRecorder.getReport().contains("min=NaN"));

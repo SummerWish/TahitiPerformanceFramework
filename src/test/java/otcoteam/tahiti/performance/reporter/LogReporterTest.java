@@ -2,7 +2,6 @@ package otcoteam.tahiti.performance.reporter;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
-import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.classic.encoder.PatternLayoutEncoder;
 import org.junit.Test;
 
@@ -40,7 +39,7 @@ public class LogReporterTest {
     public void createEncoder() throws Exception {
         PatternLayoutEncoder encoder = reporter.createEncoder();
         assertNotNull(encoder.getContext());
-        assertEquals("%d %-5level - %msg%n",encoder.getPattern());
+        assertEquals("%d %-5level - %msg%n", encoder.getPattern());
     }
 
     @Test
