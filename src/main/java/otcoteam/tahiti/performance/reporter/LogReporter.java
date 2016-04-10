@@ -6,7 +6,7 @@ import ch.qos.logback.classic.encoder.PatternLayoutEncoder;
 import org.slf4j.LoggerFactory;
 
 /**
- * 封装了日志生成器，用于记录并生成性能日志
+ * 日志生成器的抽象类, 定义了所有日志生成器都要实现的接口
  */
 public abstract class LogReporter {
 
@@ -46,11 +46,12 @@ public abstract class LogReporter {
     }
 
     /**
-     * 创建日志生成器，默认记录所有级别的日志
+     * 创建日志生成器
      *
-     * @return logger 日志生成器
+     * @param clazz 日志记录对象所处的类
+     * @return 日志生成器
      */
-    protected <T> Logger createLogger(Class<T> clazz) {
+    protected Logger createLogger(Class<?> clazz) {
         Logger logger = (Logger) LoggerFactory.getLogger(clazz);
         logger.setAdditive(false);
         return logger;

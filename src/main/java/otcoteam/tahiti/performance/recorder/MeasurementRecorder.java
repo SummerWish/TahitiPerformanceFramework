@@ -1,7 +1,7 @@
 package otcoteam.tahiti.performance.recorder;
 
 /**
- * 所有用来记录指标性能的类都应该继承这个类
+ * 指标的抽象类, 定义了所有性能指标需要实现的接口
  */
 public abstract class MeasurementRecorder {
 

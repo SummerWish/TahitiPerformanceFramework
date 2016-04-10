@@ -11,7 +11,7 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
- * 用于管理性能监测与生成日志记录
+ * 性能检测
  */
 public class PerformanceMonitor {
 
@@ -40,9 +40,9 @@ public class PerformanceMonitor {
     }
 
     /**
-     * 开始性能检测并定时生成日志
+     * 开始定时生成报告
      *
-     * @param period 生成日志的时间间隔
+     * @param period 生成报告的时间间隔
      * @param unit   时间单位
      * @return 当前实例供链式调用
      */
@@ -85,14 +85,16 @@ public class PerformanceMonitor {
     }
 
     /**
-     * 是否已经启动
+     * 是否已启动定时报告生成
+     *
+     * @return 是否已经启动
      */
     public boolean isStarted() {
         return executorService != null;
     }
 
     /**
-     * 生成报告日志
+     * 生成一次报告
      */
     protected void report() {
         for (MeasurementRecorder recorder : recorders) {

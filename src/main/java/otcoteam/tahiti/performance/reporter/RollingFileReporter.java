@@ -17,7 +17,7 @@ public class RollingFileReporter extends LogReporter {
     /**
      * 初始化日志生成器
      *
-     * @param fileNamePattern 日志文件名称的格式
+     * @param fileNamePattern 需要分文件写入日志的文件名的格式
      */
     public RollingFileReporter(String fileNamePattern) {
         RollingFileAppender fileAppender = new RollingFileAppender();
@@ -38,6 +38,9 @@ public class RollingFileReporter extends LogReporter {
         logger.addAppender(fileAppender);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Logger getLogger() {
         return logger;

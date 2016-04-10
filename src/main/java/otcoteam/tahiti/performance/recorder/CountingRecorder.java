@@ -1,7 +1,7 @@
 package otcoteam.tahiti.performance.recorder;
 
 /**
- * 用于对指定指标计数
+ * 计数型指标, 报告总次数
  */
 public class CountingRecorder extends MeasurementRecorder {
 
@@ -25,23 +25,32 @@ public class CountingRecorder extends MeasurementRecorder {
         reset();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getName() {
         return name;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String getReport() {
         return Long.toString(counter);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void reset() {
         counter = 0;
     }
 
     /**
-     * 计数
+     * 记录一次计数
      */
     public void record() {
         counter++;

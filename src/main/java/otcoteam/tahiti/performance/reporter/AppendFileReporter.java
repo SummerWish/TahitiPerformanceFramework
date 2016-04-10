@@ -28,6 +28,9 @@ public class AppendFileReporter extends LogReporter {
         logger.addAppender(fileAppender);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Logger getLogger() {
         return logger;
