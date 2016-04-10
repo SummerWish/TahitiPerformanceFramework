@@ -6,36 +6,58 @@ import otcoteam.tahiti.performance.recorder.QuantizedRecorder;
 import java.util.EnumSet;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 
 public class QuantizedRecorderTest {
-    public QuantizedRecorder qRecorder = new QuantizedRecorder("Usage", EnumSet.of(
-            QuantizedRecorder.OutputField.AVERAGE,
-            QuantizedRecorder.OutputField.MAX,
-            QuantizedRecorder.OutputField.MIN
-    ));
 
     @Test
     public void testGetName() {
-        assertEquals("Usage", qRecorder.getName());
+        QuantizedRecorder recorder = new QuantizedRecorder("Usage", EnumSet.of(
+                QuantizedRecorder.OutputField.AVERAGE,
+                QuantizedRecorder.OutputField.MAX,
+                QuantizedRecorder.OutputField.MIN
+        ));
+        assertEquals("Usage", recorder.getName());
     }
 
     @Test
-    public void testRecord() {
-        qRecorder.record(10);
-        qRecorder.record(100);
-        qRecorder.record(70);
-        assertTrue(qRecorder.getReport().contains("average=60.00"));
-        assertTrue(qRecorder.getReport().contains("min=10"));
-        assertTrue(qRecorder.getReport().contains("max=100"));
+    public void testGetReportAtInitial() {
+        QuantizedRecorder recorder = new QuantizedRecorder("", EnumSet.of(
+                QuantizedRecorder.OutputField.MIN
+        ));
+        assertTrue(recorder.getReport().contains("min=NaN"));
+        assertFalse(recorder.getReport().contains("max="));
+        assertFalse(recorder.getReport().contains("average="));
+        assertFalse(recorder.getReport().contains("sum="));
+    }
+
+    @Test
+    public void testGetRecord() {
+        QuantizedRecorder recorder = new QuantizedRecorder("", EnumSet.of(
+                QuantizedRecorder.OutputField.AVERAGE,
+                QuantizedRecorder.OutputField.MAX,
+                QuantizedRecorder.OutputField.MIN,
+                QuantizedRecorder.OutputField.SUM
+        ));
+        recorder.record(10);
+        recorder.record(100);
+        recorder.record(70);
+        assertTrue(recorder.getReport().contains("average=60.00"));
+        assertTrue(recorder.getReport().contains("min=10"));
+        assertTrue(recorder.getReport().contains("max=100"));
+        assertTrue(recorder.getReport().contains("sum=180"));
     }
 
     @Test
     public void testReset() {
-        qRecorder.reset();
-        assertTrue(qRecorder.getReport().contains("average=NaN"));
-        assertTrue(qRecorder.getReport().contains("min=NaN"));
-        assertTrue(qRecorder.getReport().contains("max=NaN"));
+        QuantizedRecorder recorder = new QuantizedRecorder("", EnumSet.of(
+                QuantizedRecorder.OutputField.MAX
+        ));
+        recorder.record(10);
+        recorder.reset();
+        assertTrue(recorder.getReport().contains("max=NaN"));
     }
+
 }

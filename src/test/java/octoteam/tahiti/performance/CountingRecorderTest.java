@@ -7,27 +7,33 @@ import static org.junit.Assert.assertEquals;
 
 
 public class CountingRecorderTest {
-    public CountingRecorder testRecorder = new CountingRecorder("Login times");
 
     @Test
-    public void testgetName() {
-        assertEquals("Login times", testRecorder.getName());
+    public void testGetName() {
+        CountingRecorder recorder = new CountingRecorder("Login times");
+        assertEquals("Login times", recorder.getName());
     }
 
     @Test
-    public void testgetReport() {
-        assertEquals("0", testRecorder.getReport());
+    public void testGetReportAtInitial() {
+        CountingRecorder recorder = new CountingRecorder("");
+        assertEquals("0", recorder.getReport());
     }
 
     @Test
-    public void testRecord() {
-        testRecorder.record();
-        assertEquals("1", testRecorder.getReport());
+    public void testGetRecord() {
+        CountingRecorder recorder = new CountingRecorder("");
+        recorder.record();
+        assertEquals("1", recorder.getReport());
+        recorder.record();
+        assertEquals("2", recorder.getReport());
     }
 
     @Test
-    public void testRest() {
-        testRecorder.reset();
-        assertEquals("0", testRecorder.getReport());
+    public void testResst() {
+        CountingRecorder recorder = new CountingRecorder("");
+        recorder.record();
+        recorder.reset();
+        assertEquals("0", recorder.getReport());
     }
 }
