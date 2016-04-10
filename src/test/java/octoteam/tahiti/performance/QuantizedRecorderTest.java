@@ -12,17 +12,17 @@ public class QuantizedRecorderTest {
 
     @Test
     public void testGetName() {
-        QuantizedRecorder recorder = new QuantizedRecorder("Usage", EnumSet.of(
+        QuantizedRecorder recorder = new QuantizedRecorder("foo", EnumSet.of(
                 QuantizedRecorder.OutputField.AVERAGE,
                 QuantizedRecorder.OutputField.MAX,
                 QuantizedRecorder.OutputField.MIN
         ));
-        assertEquals("Usage", recorder.getName());
+        assertEquals("foo", recorder.getName());
     }
 
     @Test
     public void testGetReportAtInitial() {
-        QuantizedRecorder recorder = new QuantizedRecorder("", EnumSet.of(
+        QuantizedRecorder recorder = new QuantizedRecorder("foo", EnumSet.of(
                 QuantizedRecorder.OutputField.MIN
         ));
         assertTrue(recorder.getReport().contains("min=NaN"));
@@ -33,7 +33,7 @@ public class QuantizedRecorderTest {
 
     @Test
     public void testGetRecord() {
-        QuantizedRecorder recorder = new QuantizedRecorder("", EnumSet.of(
+        QuantizedRecorder recorder = new QuantizedRecorder("foo", EnumSet.of(
                 QuantizedRecorder.OutputField.AVERAGE,
                 QuantizedRecorder.OutputField.MAX,
                 QuantizedRecorder.OutputField.MIN,
@@ -50,7 +50,7 @@ public class QuantizedRecorderTest {
 
     @Test
     public void testReset() {
-        QuantizedRecorder recorder = new QuantizedRecorder("", EnumSet.of(
+        QuantizedRecorder recorder = new QuantizedRecorder("foo", EnumSet.of(
                 QuantizedRecorder.OutputField.MAX
         ));
         recorder.record(10);

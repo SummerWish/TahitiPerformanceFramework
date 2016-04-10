@@ -1,8 +1,8 @@
 package otcoteam.tahiti.performance.reporter;
 
+import ch.qos.logback.classic.Logger;
 import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.classic.encoder.PatternLayoutEncoder;
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
@@ -20,7 +20,7 @@ public abstract class LogReporter {
      *
      * @return logger 日志生成器
      */
-    public abstract Logger getLogger();
+    public abstract org.slf4j.Logger getLogger();
 
     /**
      * 返回日志生成器环境
@@ -50,8 +50,10 @@ public abstract class LogReporter {
      *
      * @return logger 日志生成器
      */
-    protected Logger createLogger() {
-        return LoggerFactory.getLogger(LogReporter.class);
+    protected <T> Logger createLogger(Class<T> clazz) {
+        Logger logger = (Logger) LoggerFactory.getLogger(clazz);
+        logger.setAdditive(false);
+        return logger;
     }
 
 }

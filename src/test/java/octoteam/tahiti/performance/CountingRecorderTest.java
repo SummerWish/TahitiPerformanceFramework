@@ -10,19 +10,19 @@ public class CountingRecorderTest {
 
     @Test
     public void testGetName() {
-        CountingRecorder recorder = new CountingRecorder("Login times");
-        assertEquals("Login times", recorder.getName());
+        CountingRecorder recorder = new CountingRecorder("foo");
+        assertEquals("foo", recorder.getName());
     }
 
     @Test
     public void testGetReportAtInitial() {
-        CountingRecorder recorder = new CountingRecorder("");
+        CountingRecorder recorder = new CountingRecorder("foo");
         assertEquals("0", recorder.getReport());
     }
 
     @Test
     public void testGetRecord() {
-        CountingRecorder recorder = new CountingRecorder("");
+        CountingRecorder recorder = new CountingRecorder("foo");
         recorder.record();
         assertEquals("1", recorder.getReport());
         recorder.record();
@@ -31,7 +31,7 @@ public class CountingRecorderTest {
 
     @Test
     public void testResst() {
-        CountingRecorder recorder = new CountingRecorder("");
+        CountingRecorder recorder = new CountingRecorder("foo");
         recorder.record();
         recorder.reset();
         assertEquals("0", recorder.getReport());

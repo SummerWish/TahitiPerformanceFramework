@@ -1,16 +1,14 @@
 package otcoteam.tahiti.performance.reporter;
 
+import ch.qos.logback.classic.Logger;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.Appender;
-import ch.qos.logback.core.FileAppender;
 import ch.qos.logback.core.rolling.RollingFileAppender;
 import ch.qos.logback.core.rolling.RollingPolicy;
 import ch.qos.logback.core.rolling.TimeBasedRollingPolicy;
 import org.junit.Test;
-import org.slf4j.Logger;
 
 import java.util.Iterator;
-import java.util.Random;
 
 import static org.junit.Assert.*;
 
@@ -18,18 +16,16 @@ public class RollingFileReporterTest {
 
     @Test
     public void testRollingFileReporter() {
-        String tempFile = System.getProperty("java.io.tmpdir") + Double.toString(new Random().nextDouble()) + "-%d{yyyy-MM-dd_HH-mm}";
+        String tempFile = System.getProperty("java.io.tmpdir") + Double.toString(System.nanoTime()) + "-%d{yyyy-MM-dd_HH-mm}.log";
         LogReporter reporter = new RollingFileReporter(tempFile);
 
-        Logger logger = reporter.getLogger();
+        Logger logger = (Logger) reporter.getLogger();
         assertNotNull(logger);
 
-        Iterator<Appender<ILoggingEvent>> iterator = ((ch.qos.logback.classic.Logger) logger).iteratorForAppenders();
+        Iterator<Appender<ILoggingEvent>> iterator = logger.iteratorForAppenders();
         assertTrue(iterator.hasNext());
 
         Appender appender = iterator.next();
-        assertTrue(appender instanceof FileAppender);
-        appender = iterator.next();
         assertTrue(appender instanceof RollingFileAppender);
 
         RollingFileAppender rollingFileAppender = (RollingFileAppender) appender;

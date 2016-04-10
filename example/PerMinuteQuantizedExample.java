@@ -10,6 +10,7 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 public class PerMinuteQuantizedExample {
+
     public static void main(String[] args) {
         // 首先需要一个报告生成器, 此处我们建立 AppendFileReporter, 即
         // 生成报告追加到同一个文件中.
@@ -40,4 +41,5 @@ public class PerMinuteQuantizedExample {
             }
         }, 0, 1, TimeUnit.SECONDS);
     }
+
 }
