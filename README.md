@@ -4,6 +4,8 @@
 [![Coverage Status](https://coveralls.io/repos/github/SummerWish/TahitiPerformanceMonitor/badge.svg?branch=master)](https://coveralls.io/github/SummerWish/TahitiPerformanceMonitor?branch=master)
 [![Dependency Status](https://www.versioneye.com/user/projects/57091970fcd19a0045440822/badge.svg)](https://www.versioneye.com/user/projects/57091970fcd19a0045440822)
 
+[Documentation](http://summerwish.github.io/TahitiPerformanceMonitor/)
+
 一个简单的性能监控库。
 
 该监控库支持监控统计两类指标：
