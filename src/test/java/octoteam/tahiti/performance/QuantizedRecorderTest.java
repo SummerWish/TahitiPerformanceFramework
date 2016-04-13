@@ -1,7 +1,7 @@
 package octoteam.tahiti.performance;
 
 import org.junit.Test;
-import otcoteam.tahiti.performance.recorder.QuantizedRecorder;
+import octoteam.tahiti.performance.recorder.QuantizedRecorder;
 
 import java.util.EnumSet;
 

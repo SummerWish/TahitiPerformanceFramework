@@ -1,4 +1,4 @@
-package otcoteam.tahiti.performance.recorder;
+package octoteam.tahiti.performance.recorder;
 
 /**
  * 指标的抽象类, 定义了所有性能指标需要实现的接口

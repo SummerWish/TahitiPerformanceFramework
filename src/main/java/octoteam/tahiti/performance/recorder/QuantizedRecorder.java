@@ -1,4 +1,4 @@
-package otcoteam.tahiti.performance.recorder;
+package octoteam.tahiti.performance.recorder;
 
 import java.util.EnumSet;
 import java.util.HashMap;

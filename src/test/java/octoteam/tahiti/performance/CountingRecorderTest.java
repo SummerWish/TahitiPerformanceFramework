@@ -1,7 +1,7 @@
 package octoteam.tahiti.performance;
 
 import org.junit.Test;
-import otcoteam.tahiti.performance.recorder.CountingRecorder;
+import octoteam.tahiti.performance.recorder.CountingRecorder;
 
 import static org.junit.Assert.assertEquals;
 

@@ -1,4 +1,4 @@
-package otcoteam.tahiti.performance.reporter;
+package octoteam.tahiti.performance.reporter;
 
 import ch.qos.logback.classic.Logger;
 import ch.qos.logback.core.FileAppender;

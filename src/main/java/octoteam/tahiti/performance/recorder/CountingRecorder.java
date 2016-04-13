@@ -1,4 +1,4 @@
-package otcoteam.tahiti.performance.recorder;
+package octoteam.tahiti.performance.recorder;
 
 /**
  * 计数型指标, 报告总次数

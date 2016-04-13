@@ -1,9 +1,9 @@
-package otcoteam.tahiti.performance;
+package octoteam.tahiti.performance;
 
+import octoteam.tahiti.performance.recorder.MeasurementRecorder;
 import org.junit.Test;
 import org.slf4j.Logger;
-import otcoteam.tahiti.performance.recorder.MeasurementRecorder;
-import otcoteam.tahiti.performance.reporter.LogReporter;
+import octoteam.tahiti.performance.reporter.LogReporter;
 
 import java.util.concurrent.TimeUnit;
 
