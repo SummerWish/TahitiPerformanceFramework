@@ -24,8 +24,6 @@ public class CustomFormatExample {
                 .addRecorder(requestTimes)
                 .start(1, TimeUnit.MINUTES);
 
-        monitor.report();
-
     }
 
 }

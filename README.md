@@ -58,7 +58,7 @@
 
 ### 手工下载
 
-- [tahiti-performance](http://sse.tongji.edu.cn/tahiti/nexus/service/local/repositories/public/content/octoteam/tahiti/tahiti-performance/1.0-SNAPSHOT/tahiti-performance-1.0-20160420.132629-7.jar)
+- [tahiti-performance](http://sse.tongji.edu.cn/tahiti/nexus/service/local/repositories/public/content/octoteam/tahiti/tahiti-performance/1.0-SNAPSHOT/tahiti-performance-1.0-20160420.135729-8.jar)
 
 除了这个库本身以外，TahitiPerformanceMonitor 还依赖于 [logback](http://logback.qos.ch/) 写入日志。您需要将以下 jar 全部下载下来添加到项目中：
 
@@ -191,3 +191,18 @@ monitor
 ```
 [2016-04-20 21:13:20,926] Request times is CountingRecord(2)
 ```
+
+### 定期打包报告
+
+若传递给 `RollingFileReporter` 的文件名结尾是 `.zip` 或 `.gz` 则会生成压缩的报告文件而不是文本报告文件。
+
+以下演示每分钟生成报告文件且每天生成一个当天的打包的报告文件：
+
+```java
+LogReporter realtimeReporter = new RollingFileReporter("present/log-%d{yyyy-MM-dd_HH-mm}.log");
+LogReporter archiveReporter = new RollingFileReporter("archive/log-%d{yyyy-MM-dd}.zip");
+
+PerformanceMonitor monitor = new PerformanceMonitor(realtimeReporter, archiveReporter);
+```
+
+以上代码会在 `present` 目录下生成并保留每分钟的报告文件，且在 `archive` 目录下生成并保留每天的报告压缩文件。

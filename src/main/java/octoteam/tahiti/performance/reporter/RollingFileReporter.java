@@ -11,7 +11,7 @@ public class RollingFileReporter extends LogReporter {
     /**
      * 初始化日志生成器
      *
-     * @param fileNamePattern 需要分文件写入日志的文件名的格式
+     * @param fileNamePattern 需要分文件写入日志的文件名的格式, 若扩展名是 .zip 或 .gz 则会生成压缩文件
      * @param pattern         日志输出格式
      */
     public RollingFileReporter(String fileNamePattern, String pattern) {

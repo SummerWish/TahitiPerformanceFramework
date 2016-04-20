@@ -17,7 +17,7 @@ public class PerformanceMonitor {
     /**
      * 日志生成器
      */
-    private LogReporter logReporter = null;
+    private LogReporter[] logReporters = null;
 
     /**
      * 定时调用服务
@@ -34,8 +34,8 @@ public class PerformanceMonitor {
      *
      * @param reporter 输出器
      */
-    public PerformanceMonitor(LogReporter reporter) {
-        logReporter = reporter;
+    public PerformanceMonitor(LogReporter... reporter) {
+        logReporters = reporter;
     }
 
     /**
@@ -95,10 +95,12 @@ public class PerformanceMonitor {
     /**
      * 生成一次报告
      */
-    public void report() {
+    void report() {
         for (MeasurementRecorder recorder : recorders) {
-            logReporter.getLogger().info(new RecordMarker(recorder), recorder.getReport());
-            recorder.reset();
+            for (LogReporter reporter : logReporters) {
+                reporter.getLogger().info(new RecordMarker(recorder), recorder.getReport());
+                recorder.reset();
+            }
         }
     }
 
