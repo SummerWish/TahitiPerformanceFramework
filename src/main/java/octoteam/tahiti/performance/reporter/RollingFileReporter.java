@@ -1,6 +1,5 @@
 package octoteam.tahiti.performance.reporter;
 
-import ch.qos.logback.classic.Logger;
 import ch.qos.logback.core.rolling.RollingFileAppender;
 import ch.qos.logback.core.rolling.TimeBasedRollingPolicy;
 
@@ -10,19 +9,17 @@ import ch.qos.logback.core.rolling.TimeBasedRollingPolicy;
 public class RollingFileReporter extends LogReporter {
 
     /**
-     * 日志生成器
-     */
-    protected Logger logger;
-
-    /**
      * 初始化日志生成器
      *
      * @param fileNamePattern 需要分文件写入日志的文件名的格式
+     * @param pattern         日志输出格式
      */
-    public RollingFileReporter(String fileNamePattern) {
+    public RollingFileReporter(String fileNamePattern, String pattern) {
+        super(RollingFileReporter.class, pattern);
+
         RollingFileAppender fileAppender = new RollingFileAppender();
         fileAppender.setContext(getLoggerContext());
-        fileAppender.setEncoder(createEncoder());
+        fileAppender.setEncoder(getEncoder());
 
         TimeBasedRollingPolicy policy = new TimeBasedRollingPolicy();
         policy.setContext(getLoggerContext());
@@ -34,16 +31,16 @@ public class RollingFileReporter extends LogReporter {
         policy.start();
         fileAppender.start();
 
-        logger = createLogger(RollingFileReporter.class);
-        logger.addAppender(fileAppender);
+        getLogger().addAppender(fileAppender);
     }
 
     /**
-     * {@inheritDoc}
+     * 初始化日志生成器
+     *
+     * @param fileNamePattern 需要分文件写入日志的文件名的格式
      */
-    @Override
-    public Logger getLogger() {
-        return logger;
+    public RollingFileReporter(String fileNamePattern) {
+        this(fileNamePattern, null);
     }
 
 }

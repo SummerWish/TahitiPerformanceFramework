@@ -1,7 +1,6 @@
 package octoteam.tahiti.performance;
 
 import octoteam.tahiti.performance.recorder.MeasurementRecorder;
-import org.slf4j.Logger;
 import octoteam.tahiti.performance.reporter.LogReporter;
 
 import java.util.LinkedList;
@@ -18,7 +17,7 @@ public class PerformanceMonitor {
     /**
      * 日志生成器
      */
-    private Logger logger = null;
+    private LogReporter logReporter = null;
 
     /**
      * 定时调用服务
@@ -31,12 +30,12 @@ public class PerformanceMonitor {
     private List<MeasurementRecorder> recorders = new LinkedList<MeasurementRecorder>();
 
     /**
-     * 初始化
+     * 构造性能监控实例
      *
-     * @param reporter 日志生成器
+     * @param reporter 输出器
      */
     public PerformanceMonitor(LogReporter reporter) {
-        logger = reporter.getLogger();
+        logReporter = reporter;
     }
 
     /**
@@ -96,9 +95,9 @@ public class PerformanceMonitor {
     /**
      * 生成一次报告
      */
-    protected void report() {
+    public void report() {
         for (MeasurementRecorder recorder : recorders) {
-            logger.info(String.format("%s: %s", recorder.getName(), recorder.getReport()));
+            logReporter.getLogger().info(new RecordMarker(recorder), recorder.getReport());
             recorder.reset();
         }
     }

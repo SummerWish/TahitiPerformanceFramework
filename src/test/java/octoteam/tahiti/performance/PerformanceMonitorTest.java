@@ -1,9 +1,13 @@
 package octoteam.tahiti.performance;
 
+import ch.qos.logback.classic.Logger;
+import ch.qos.logback.classic.spi.LoggingEvent;
+import ch.qos.logback.core.Appender;
 import octoteam.tahiti.performance.recorder.MeasurementRecorder;
-import org.junit.Test;
-import org.slf4j.Logger;
 import octoteam.tahiti.performance.reporter.LogReporter;
+import org.junit.Test;
+import org.mockito.ArgumentMatcher;
+import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.TimeUnit;
 
@@ -15,11 +19,16 @@ public class PerformanceMonitorTest {
 
     @Test()
     public void testReport() {
-        Logger logger = mock(Logger.class);
-        LogReporter dummyLogReporter = mock(LogReporter.class);
-        when(dummyLogReporter.getLogger()).thenReturn(logger);
+        Appender dummyAppender = mock(Appender.class);
+        when(dummyAppender.getName()).thenReturn("MOCK");
+
+        Logger logger = (Logger) LoggerFactory.getLogger(PerformanceMonitorTest.class);
+        logger.setAdditive(false);
+        logger.addAppender(dummyAppender);
+
+        LogReporter dummyLogReporter = new LogReporter(logger);
+
         MeasurementRecorder dummyMeasurementRecorder = mock(MeasurementRecorder.class);
-        when(dummyMeasurementRecorder.getName()).thenReturn("name");
         when(dummyMeasurementRecorder.getReport()).thenReturn("foo");
 
         PerformanceMonitor performanceMonitor = new PerformanceMonitor(dummyLogReporter);
@@ -27,16 +36,26 @@ public class PerformanceMonitorTest {
         performanceMonitor.report();
 
         verify(dummyMeasurementRecorder).reset();
-        verify(logger).info("name: foo");
+        verify(dummyAppender).doAppend(argThat(new ArgumentMatcher() {
+            @Override
+            public boolean matches(final Object argument) {
+                return ((LoggingEvent) argument).getFormattedMessage().contains("foo");
+            }
+        }));
     }
 
     @Test
     public void testSchedule() throws InterruptedException {
-        Logger logger = mock(Logger.class);
-        LogReporter dummyLogReporter = mock(LogReporter.class);
-        when(dummyLogReporter.getLogger()).thenReturn(logger);
+        Appender dummyAppender = mock(Appender.class);
+        when(dummyAppender.getName()).thenReturn("MOCK");
+
+        Logger logger = (Logger) LoggerFactory.getLogger(PerformanceMonitorTest.class);
+        logger.setAdditive(false);
+        logger.addAppender(dummyAppender);
+
+        LogReporter dummyLogReporter = new LogReporter(logger);
+
         MeasurementRecorder dummyMeasurementRecorder = mock(MeasurementRecorder.class);
-        when(dummyMeasurementRecorder.getName()).thenReturn("name");
         when(dummyMeasurementRecorder.getReport()).thenReturn("foo");
 
         PerformanceMonitor performanceMonitor = new PerformanceMonitor(dummyLogReporter);
@@ -49,7 +68,12 @@ public class PerformanceMonitorTest {
         Thread.sleep(800);
 
         verify(dummyMeasurementRecorder).reset();
-        verify(logger).info("name: foo");
+        verify(dummyAppender).doAppend(argThat(new ArgumentMatcher() {
+            @Override
+            public boolean matches(final Object argument) {
+                return ((LoggingEvent) argument).getFormattedMessage().contains("foo");
+            }
+        }));
 
         performanceMonitor.stop();
         assertFalse(performanceMonitor.isStarted());

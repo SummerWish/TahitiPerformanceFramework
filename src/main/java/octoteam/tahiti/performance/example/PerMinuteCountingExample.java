@@ -1,7 +1,9 @@
-import otcoteam.tahiti.performance.PerformanceMonitor;
-import otcoteam.tahiti.performance.recorder.CountingRecorder;
-import otcoteam.tahiti.performance.reporter.LogReporter;
-import otcoteam.tahiti.performance.reporter.RollingFileReporter;
+package octoteam.tahiti.performance.example;
+
+import octoteam.tahiti.performance.PerformanceMonitor;
+import octoteam.tahiti.performance.recorder.CountingRecorder;
+import octoteam.tahiti.performance.reporter.LogReporter;
+import octoteam.tahiti.performance.reporter.RollingFileReporter;
 
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;

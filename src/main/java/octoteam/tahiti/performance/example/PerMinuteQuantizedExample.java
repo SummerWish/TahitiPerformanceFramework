@@ -1,7 +1,9 @@
-import otcoteam.tahiti.performance.PerformanceMonitor;
-import otcoteam.tahiti.performance.recorder.QuantizedRecorder;
-import otcoteam.tahiti.performance.reporter.AppendFileReporter;
-import otcoteam.tahiti.performance.reporter.LogReporter;
+package octoteam.tahiti.performance.example;
+
+import octoteam.tahiti.performance.PerformanceMonitor;
+import octoteam.tahiti.performance.recorder.QuantizedRecorder;
+import octoteam.tahiti.performance.reporter.AppendFileReporter;
+import octoteam.tahiti.performance.reporter.LogReporter;
 
 import java.util.EnumSet;
 import java.util.Random;

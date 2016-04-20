@@ -1,7 +1,7 @@
 package octoteam.tahiti.performance;
 
-import org.junit.Test;
 import octoteam.tahiti.performance.recorder.QuantizedRecorder;
+import org.junit.Test;
 
 import java.util.EnumSet;
 
@@ -43,9 +43,9 @@ public class QuantizedRecorderTest {
         recorder.record(100);
         recorder.record(70);
         assertTrue(recorder.getReport().contains("average=60.00"));
-        assertTrue(recorder.getReport().contains("min=10"));
-        assertTrue(recorder.getReport().contains("max=100"));
-        assertTrue(recorder.getReport().contains("sum=180"));
+        assertTrue(recorder.getReport().contains("min=10.00"));
+        assertTrue(recorder.getReport().contains("max=100.00"));
+        assertTrue(recorder.getReport().contains("sum=180.00"));
     }
 
     @Test

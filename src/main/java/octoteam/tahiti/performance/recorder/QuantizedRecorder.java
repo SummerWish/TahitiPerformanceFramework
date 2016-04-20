@@ -1,5 +1,8 @@
 package octoteam.tahiti.performance.recorder;
 
+import octoteam.tahiti.performance.formatter.DefaultQuantizedRecordFormatter;
+import octoteam.tahiti.performance.formatter.IReportFormatable;
+
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -8,7 +11,7 @@ import java.util.List;
 /**
  * 数值型指标, 报告平均值、最大值、最小值以及总值
  */
-public class QuantizedRecorder extends MeasurementRecorder {
+public class QuantizedRecorder extends MeasurementRecorder<HashMap<String, Double>> {
 
     /**
      * 报告中支持的字段
@@ -36,11 +39,6 @@ public class QuantizedRecorder extends MeasurementRecorder {
     }
 
     /**
-     * 指标名称
-     */
-    private String name;
-
-    /**
      * 对于该指标，需要记录的数值类型
      */
     private EnumSet<OutputField> outputFields;
@@ -51,30 +49,33 @@ public class QuantizedRecorder extends MeasurementRecorder {
     private List<Double> records;
 
     /**
-     * 初始化记录器, 指定需要报告的字段
+     * 构造数值型指标
      *
      * @param name         指标名称
      * @param outputFields 报告中要包含的字段
      */
     public QuantizedRecorder(String name, EnumSet<OutputField> outputFields) {
-        this.name = name;
+        this(name, outputFields, new DefaultQuantizedRecordFormatter());
+    }
+
+    /**
+     * 构造数值型指标
+     *
+     * @param name         指标名称
+     * @param outputFields 指标名称
+     * @param formatter    报告格式化器
+     */
+    public QuantizedRecorder(String name, EnumSet<OutputField> outputFields, IReportFormatable<HashMap<String, Double>> formatter) {
+        super(name, formatter);
         this.outputFields = outputFields;
+        this.formatter = formatter;
         reset();
     }
 
     /**
      * {@inheritDoc}
      */
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getReport() {
+    protected HashMap<String, Double> getReportData() {
         double sum = 0, max = Double.NEGATIVE_INFINITY, min = Double.POSITIVE_INFINITY, avg = 0;
         for (double v : records) {
             sum += v;
@@ -90,13 +91,12 @@ public class QuantizedRecorder extends MeasurementRecorder {
             avg = sum / records.size();
         }
 
-        HashMap<String, String> fields = new HashMap<String, String>();
-        if (outputFields.contains(OutputField.AVERAGE)) fields.put("average", String.format("%.2f", avg));
-        if (outputFields.contains(OutputField.SUM)) fields.put("sum", String.format("%.2f", sum));
-        if (outputFields.contains(OutputField.MIN)) fields.put("min", String.format("%.2f", min));
-        if (outputFields.contains(OutputField.MAX)) fields.put("max", String.format("%.2f", max));
-
-        return fields.toString();
+        HashMap<String, Double> fields = new HashMap<String, Double>();
+        if (outputFields.contains(OutputField.AVERAGE)) fields.put("average", avg);
+        if (outputFields.contains(OutputField.SUM)) fields.put("sum", sum);
+        if (outputFields.contains(OutputField.MIN)) fields.put("min", min);
+        if (outputFields.contains(OutputField.MAX)) fields.put("max", max);
+        return fields;
     }
 
     /**

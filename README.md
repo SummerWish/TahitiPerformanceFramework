@@ -58,7 +58,7 @@
 
 ### 手工下载
 
-- [tahiti-performance](http://sse.tongji.edu.cn/tahiti/nexus/service/local/repositories/public/content/octoteam/tahiti/tahiti-performance/1.0-SNAPSHOT/tahiti-performance-1.0-20160413.122610-5.jar)
+- [tahiti-performance](http://sse.tongji.edu.cn/tahiti/nexus/service/local/repositories/public/content/octoteam/tahiti/tahiti-performance/1.0-SNAPSHOT/tahiti-performance-1.0-20160420.132629-7.jar)
 
 除了这个库本身以外，TahitiPerformanceMonitor 还依赖于 [logback](http://logback.qos.ch/) 写入日志。您需要将以下 jar 全部下载下来添加到项目中：
 
@@ -148,3 +148,46 @@ executorService.scheduleAtFixedRate(new Runnable() {
 ```
 
 运行后，请查看当前目录下 `cpu-usage.log`，记录了每分钟内 `cpu` 指标的最大值最小值和平均值。
+
+### 自定义报告输出
+
+TahitiPerformanceMonitor 有两层输出控制，每个指标都有一种报告输出格式，而每个报告生成器则有指标输出格式。
+
+#### 控制报告输出格式
+
+对于 `CountingRecorder`，默认的报告输出是将记录的计数值转为字符串（见 `DefaultCountingRecordFormatter`）。若要覆盖该默认行为，您可以在构造 `CountingRecorder` 最后一个参数传入一个您自己的 `IReportFormatable<Long>`。
+
+对于 `QuantizedRecorder`，默认的报告输出是以 `%s=%.2f` 形式组合每一个输出字段形成报告输出（见 `DefaultQuantizedRecordFormatter`）。若要覆盖该默认行为，您可以在构造 `QuantizedRecorder` 最后一个参数传入一个您自己的 `IReportFormatable<HashMap<String, Double>>`。
+
+#### 控制指标输出格式
+
+默认输出到文件的格式是 `%d - %marker: %msg%n`，其中 `%d` 为日期，`%marker` 为指标名称，`%msg` 为指标报告，`%n` 为换行符，例如：
+
+```
+2016-04-20 21:02:48,109 - Request times: 0
+```
+
+您可以在构造报告生成器时，最后一个参数传入您自己的输出格式来控制行为。[点击此处](http://logback.qos.ch/manual/layouts.html#conversionWord)查看可以在格式字符串中使用的占位符。
+
+#### 示例
+
+```java
+LogReporter reporter = new AppendFileReporter("report.log", "[%d] %marker is %msg%n");
+PerformanceMonitor monitor = new PerformanceMonitor(reporter);
+
+CountingRecorder requestTimes = new CountingRecorder("Request times", new IReportFormatable<Long>() {
+    public String formatReport(Long data) {
+        return String.format("CountingRecord(%d)", data);
+    }
+});
+
+monitor
+    .addRecorder(requestTimes)
+    .start(1, TimeUnit.MINUTES);
+```
+
+输出日志样例：
+
+```
+[2016-04-20 21:13:20,926] Request times is CountingRecord(2)
+```

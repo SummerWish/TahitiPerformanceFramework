@@ -1,14 +1,12 @@
 package octoteam.tahiti.performance.recorder;
 
+import octoteam.tahiti.performance.formatter.DefaultCountingRecordFormatter;
+import octoteam.tahiti.performance.formatter.IReportFormatable;
+
 /**
  * 计数型指标, 报告总次数
  */
-public class CountingRecorder extends MeasurementRecorder {
-
-    /**
-     * 指标名称
-     */
-    private String name;
+public class CountingRecorder extends MeasurementRecorder<Long> {
 
     /**
      * 指标计数
@@ -16,29 +14,30 @@ public class CountingRecorder extends MeasurementRecorder {
     private long counter;
 
     /**
-     * 初始化计数器
+     * 构造计数型型指标
      *
-     * @param name 指标名称
+     * @param name      指标名称
+     * @param formatter 报告格式化器
      */
-    public CountingRecorder(String name) {
-        this.name = name;
+    public CountingRecorder(String name, IReportFormatable<Long> formatter) {
+        super(name, formatter);
         reset();
     }
 
     /**
-     * {@inheritDoc}
+     * 构造计数型型指标
+     *
+     * @param name 指标名称
      */
-    @Override
-    public String getName() {
-        return name;
+    public CountingRecorder(String name) {
+        this(name, new DefaultCountingRecordFormatter());
     }
 
     /**
      * {@inheritDoc}
      */
-    @Override
-    public String getReport() {
-        return Long.toString(counter);
+    protected Long getReportData() {
+        return counter;
     }
 
     /**

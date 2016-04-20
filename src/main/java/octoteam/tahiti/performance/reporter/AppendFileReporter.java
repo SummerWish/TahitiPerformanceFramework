@@ -1,6 +1,5 @@
 package octoteam.tahiti.performance.reporter;
 
-import ch.qos.logback.classic.Logger;
 import ch.qos.logback.core.FileAppender;
 
 /**
@@ -9,9 +8,21 @@ import ch.qos.logback.core.FileAppender;
 public class AppendFileReporter extends LogReporter {
 
     /**
-     * 日志生成器
+     * 初始化日志生成器
+     *
+     * @param fileName 需要追加日志记录的文件名
+     * @param pattern  日志输出格式
      */
-    protected Logger logger;
+    public AppendFileReporter(String fileName, String pattern) {
+        super(AppendFileReporter.class, pattern);
+        FileAppender fileAppender = new FileAppender();
+        fileAppender.setContext(getLoggerContext());
+        fileAppender.setFile(fileName);
+        fileAppender.setEncoder(getEncoder());
+        fileAppender.start();
+
+        getLogger().addAppender(fileAppender);
+    }
 
     /**
      * 初始化日志生成器
@@ -19,21 +30,7 @@ public class AppendFileReporter extends LogReporter {
      * @param fileName 需要追加日志记录的文件名
      */
     public AppendFileReporter(String fileName) {
-        FileAppender fileAppender = new FileAppender();
-        fileAppender.setContext(getLoggerContext());
-        fileAppender.setFile(fileName);
-        fileAppender.setEncoder(createEncoder());
-        fileAppender.start();
-        logger = createLogger(AppendFileReporter.class);
-        logger.addAppender(fileAppender);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Logger getLogger() {
-        return logger;
+        this(fileName, null);
     }
 
 }
