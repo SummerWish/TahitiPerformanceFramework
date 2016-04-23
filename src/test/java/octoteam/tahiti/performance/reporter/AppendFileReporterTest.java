@@ -17,7 +17,7 @@ public class AppendFileReporterTest {
         String tempFile = System.getProperty("java.io.tmpdir") + Double.toString(System.nanoTime()) + ".log";
         LogReporter reporter = new AppendFileReporter(tempFile);
 
-        Logger logger = (Logger) reporter.getLogger();
+        Logger logger = reporter.getLogger();
         assertNotNull(logger);
 
         Iterator<Appender<ILoggingEvent>> iterator = logger.iteratorForAppenders();

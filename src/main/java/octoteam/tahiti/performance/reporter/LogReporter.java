@@ -3,7 +3,6 @@ package octoteam.tahiti.performance.reporter;
 import ch.qos.logback.classic.Logger;
 import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.classic.encoder.PatternLayoutEncoder;
-import org.slf4j.LoggerFactory;
 
 /**
  * 基于日志输出的报告器
@@ -13,7 +12,7 @@ public class LogReporter {
     /**
      * 日志生成器环境
      */
-    private LoggerContext context = (LoggerContext) LoggerFactory.getILoggerFactory();
+    private LoggerContext context = new LoggerContext();
 
     /**
      * 日志生成器
@@ -28,13 +27,14 @@ public class LogReporter {
     /**
      * 构造基于日志的报告器
      *
-     * @param clazz 日志所属类
+     * @param clazz   日志所属类
+     * @param pattern 日志输出格式
      */
     public LogReporter(Class<?> clazz, String pattern) {
         if (pattern != null) {
             this.pattern = pattern;
         }
-        logger = (Logger) LoggerFactory.getLogger(clazz);
+        logger = context.getLogger(clazz);
         logger.setAdditive(false);
     }
 

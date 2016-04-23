@@ -19,7 +19,7 @@ public class RollingFileReporterTest {
         String tempFile = System.getProperty("java.io.tmpdir") + Double.toString(System.nanoTime()) + "-%d{yyyy-MM-dd_HH-mm}.log";
         LogReporter reporter = new RollingFileReporter(tempFile);
 
-        Logger logger = (Logger) reporter.getLogger();
+        Logger logger = reporter.getLogger();
         assertNotNull(logger);
 
         Iterator<Appender<ILoggingEvent>> iterator = logger.iteratorForAppenders();
