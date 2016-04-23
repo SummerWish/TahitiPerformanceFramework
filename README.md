@@ -49,7 +49,7 @@
         <dependency>
             <groupId>octoteam.tahiti</groupId>
             <artifactId>tahiti-performance</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
 
@@ -58,7 +58,7 @@
 
 ### 手工下载
 
-- [tahiti-performance](http://sse.tongji.edu.cn/tahiti/nexus/service/local/repositories/public/content/octoteam/tahiti/tahiti-performance/1.0-SNAPSHOT/tahiti-performance-1.0-20160423.125654-9.jar)
+- [tahiti-performance](http://sse.tongji.edu.cn/tahiti/nexus/service/local/repositories/public/content/octoteam/tahiti/tahiti-performance/1.1-SNAPSHOT/tahiti-performance-1.1-20160423.125939-1.jar)
 
 除了这个库本身以外，TahitiPerformanceMonitor 还依赖于 [logback](http://logback.qos.ch/) 写入日志。您需要将以下 jar 全部下载下来添加到项目中：
 
