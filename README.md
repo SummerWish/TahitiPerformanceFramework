@@ -196,13 +196,16 @@ monitor
 
 若传递给 `RollingFileReporter` 的文件名结尾是 `.zip` 或 `.gz` 则会生成压缩的报告文件而不是文本报告文件。
 
-以下演示每分钟生成报告文件且每天生成一个当天的打包的报告文件：
+以下演示每分钟生成报告文件、每天生成一个当天的打包报告文件、每周生成一个当周的打包报告文件：
 
 ```java
 LogReporter realtimeReporter = new RollingFileReporter("present/log-%d{yyyy-MM-dd_HH-mm}.log");
-LogReporter archiveReporter = new RollingFileReporter("archive/log-%d{yyyy-MM-dd}.zip");
+LogReporter dailyArchiveReporter = new RollingFileReporter("archive/log-%d{yyyy-MM-dd}.zip");
+LogReporter weeklyArchiveReporter = new RollingFileReporter("archive/log-%d{yyyy-MM-W}.zip");
 
-PerformanceMonitor monitor = new PerformanceMonitor(realtimeReporter, archiveReporter);
+PerformanceMonitor monitor = new PerformanceMonitor(realtimeReporter, dailyArchiveReporter, weeklyArchiveReporter);
 ```
 
-以上代码会在 `present` 目录下生成并保留每分钟的报告文件，且在 `archive` 目录下生成并保留每天的报告压缩文件。
+以上代码会在 `present` 目录下生成并保留每分钟的报告文件，且在 `archive` 目录下生成并保留每天的报告压缩文件和每周的报告压缩文件。
+
+`RollingFileReporter` 日期字段使用 `SimpleDateFormat` 进行格式化，您可以通过[其文档](https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html)了解更多时间输出格式。
