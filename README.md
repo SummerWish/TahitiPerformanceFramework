@@ -20,6 +20,21 @@
 
 - 追加写入同一个日志 (`AppendFileReporter`)，每个周期的报表都会写入到同一个日志中
 
+目录：
+
+  * [下载](#下载)
+    + [Maven](#maven)
+    + [手工下载](#手工下载)
+  * [示例](#示例)
+    + [每分钟统计各个指标次数，并每分钟写入新日志文件](#每分钟统计各个指标次数并每分钟写入新日志文件)
+    + [每分钟统计各个指标数值，并写入日志记录到同一个文件](#每分钟统计各个指标数值并写入日志记录到同一个文件)
+    + [自定义报告输出](#自定义报告输出)
+      - [控制报告输出格式](#控制报告输出格式)
+      - [控制指标输出格式](#控制指标输出格式)
+      - [示例](#示例-1)
+    + [输出到 Logback](#输出到-logback)
+    + [定期打包报告](#定期打包报告)
+
 ## 下载
 
 ### Maven
@@ -190,6 +205,19 @@ monitor
 
 ```
 [2016-04-20 21:13:20,926] Request times is CountingRecord(2)
+```
+
+### 输出到 Logback
+
+```java
+// 见 http://logback.qos.ch/manual/introduction.html
+Logger logger = LoggerFactory.getLogger("chapters.introduction.HelloWorld1");
+
+// 使用 logger 为参数建立 LogReporter
+LogReporter reporter = new LogReporter(logger);
+
+// 其他一切照旧
+PerformanceMonitor monitor = new PerformanceMonitor(reporter);
 ```
 
 ### 定期打包报告
